@@ -1,0 +1,26 @@
+name: manuscript
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install TeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended lmodern
+
+      - name: Build manuscript
+        run: make
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: factorial-conjecture-two-variables-pdf
+          path: output/pdf/factorial_conjecture_two_variables.pdf
