@@ -995,4 +995,270 @@ Put $h=uG$, and let $V$ be the $F$-span of its component series.
 Its dimension $k$ is between $1$ and $m$. Gaussian elimination on
 successive coefficients gives a basis $b_1,\ldots,b_k$ of $V$ with
 strictly increasing orders $a_1<\cdots<a_k$. The filtration by order
-is eventually zero: in a finite-dimensional space any stabilizing
+is eventually zero: in a finite-dimensional space any stabilizingnonzero tail would lie in every power of $z$, which is impossible.
+A nonzero element of $V$ has order at most $a_k$.
+
+The Wronskian $W=\det(b_\ell^{(j)})_{0\le j<k,\,1\le\ell\le k}$
+has order
+\begin{equation}\label{eq:wronskian-order}
+ \ord_0W=\sum_{i=1}^k a_i-\binom k2.
+\end{equation}
+Indeed, its leading coefficient after the powers of $z$ are factored
+is the product of the leading coefficients of the $b_i$ times
+$\det((a_i)_j)$, a nonzero Vandermonde determinant in characteristic
+zero. Changing the basis of $V$ multiplies $W$ by a nonzero constant.
+
+Define rows $r_0=u$, $r_{j+1}=r_j'+r_jP/q$. Then
+$h^{(j)}=r_jG$. Writing $r_j=Z_j/q^j$ gives
+\[
+ Z_{j+1}=qZ_j'-j q'Z_j+Z_jP,\qquad \deg Z_j\le j(n-1).
+\]
+Let $R_*$ have rows $r_0,\ldots,r_{k-1}$ and put $S=\binom k2$.
+Some $k$ components of $h$ form a basis of $V$, so $R_*G$ has a
+nonzero $k$-minor by \eqref{eq:wronskian-order}. Thus $R_*$ also has
+such a minor. Each $k$-minor of $R_*$ has denominator $q^S$ and a
+polynomial numerator of degree at most $(n-1)S$. Since $q$ is a unit
+at zero, the minimum order $\delta$ of its nonzero $k$-minors obeys
+$0\le\delta\le(n-1)S$.
+
+Multiplication by $G$ preserves the ideal of $k$-minors in $F[[z]]$:
+apply Cauchy--Binet first with $G$ and then with $G^{-1}$. Hence the
+minimum order for the minors of $R_*G$ is also $\delta$. A nonzero
+minor of that order is a Wronskian of $k$ components of $h$; those
+components form a basis of $V$. Equation~\eqref{eq:wronskian-order}
+therefore gives
+\[
+ \delta=\sum_{i=1}^k(a_i-(i-1)),\qquad
+ \ord_0y\le a_k\le\delta+k-1
+     \le(n-1)\binom k2+k-1.
+\]
+Each summand in the first expression is nonnegative. Finally $k\le m$
+proves \eqref{eq:moura-bound}.
+\end{proof}
+The argument is the derivative-row and Wronskian method appearing in
+Moura's work and in the release's formal proof. The corresponding Lean
+declaration is \texttt{OAI.NCHitting.}\allowbreak\texttt{system\_multiplicity}. Reading that
+declaration is not a claim that the present FC(2) paper, or this
+application, has been formally verified.
+
+\subsection{An explicit rational connection}
+Fix $A,B\in\C[t]$, $\deg A=d\ge1$, and an integer $D\ge1$.
+On a disk avoiding zero and the critical values of $A$, put
+\[
+ h_i(w)=\frac{\exp(B(t_i(w))/(Dw))}{A'(t_i(w))},\qquad
+ \Psi_{ji}(w)=t_i(w)^j h_i(w)\quad(0\le j<d).
+\]
+The determinant of $\Psi$ is a Vandermonde determinant times nonzero
+column factors, so it is invertible. In $\C(w)[t]/(A(t)-w)$, reduce
+\begin{equation}\label{eq:density-connection}
+ \frac{j t^{j-1}}{A'}-\frac{t^jA''}{(A')^2}
+ +\frac{t^jB'}{DwA'}-\frac{t^jB}{Dw^2}
+       =\sum_{k=0}^{d-1}R_{jk}(w)t^k.
+\end{equation}
+The first term is understood as zero for $j=0$.
+Differentiating $t_i'=1/A'(t_i)$ and $h_i$ proves the exact system
+$\Psi'=R\Psi$.
+
+Let $\Delta(w)=\Res_t(A(t)-w,A'(t))$. It is a nonzero polynomial.
+The resultant identity provides a representative of $1/A'$ whose
+only parameter denominator is $\Delta$. Reduction modulo $A-w$
+introduces only constant leading-coefficient denominators. Consequently
+\[
+ q(w)=Dw^2\Delta(w)^2,\qquad P(w)=q(w)R(w)
+\]
+has polynomial entries. Define
+\[
+ n=\max\{1,\deg q,1+\max_{P_{ij}\ne0}\deg P_{ij}\},\qquad
+ J=(n-1)\binom d2+d-1,
+\]
+omitting the last entry of the maximum when $P=0$.
+
+\begin{corollary}[Finite test for an identically zero density]
+\label{cor:finite-jets}
+For a constant coefficient vector $c$, an ordinary point $w_0\ne0$,
+and $h(w)=\sum_i c_i h_i(w)$ on its disk, one has
+\[
+ h\equiv0\quad\Longleftrightarrow\quad
+ h^{(j)}(w_0)=0\quad(0\le j\le J).
+\]
+\end{corollary}
+\begin{proof}
+Translate $w_0$ to zero and normalize the fundamental matrix to
+$G(w)=\Psi(w)\Psi(w_0)^{-1}$. Then
+$h=e_0^{\mathsf T}G(\Psi(w_0)c)$ is a constant scalar output.
+The denominator $q$ is nonzero at $w_0$. Apply
+Theorem~\ref{thm:multiplicity} contrapositively.
+\end{proof}
+For algebraic $A,B,w_0,c$, the derivatives are finite algebraic linear
+combinations of exponentials of algebraic numbers. They can be tested
+exactly by grouping equal exponents and using Lindemann--Weierstrass.
+This certifies a particular density identity. It neither makes every
+sheet sum nonzero nor bounds the first nonzero moment of an arbitrary
+factorial polynomial.
+
+For example, $A=t^2+1$, $B=t$ and $D=2$ give
+\[
+ R=\begin{pmatrix}
+ -\dfrac1{2(w-1)}&\dfrac{2-w}{4w^2(w-1)}\\[5pt]
+ \dfrac{2-w}{4w^2}&0
+ \end{pmatrix}.
+\]
+One may take $q=4w^2(w-1)$, $n=3$ and $J=3$.
+The first two observation rows $e_0^{\mathsf T}$ and
+$e_0^{\mathsf T}R$ are independent over $\C(w)$.
+By contrast, for $A=t(1-t)$ and constant $B=c$,
+\[
+ \frac{e^{c/(2w)}}{A'(t_+(w))}
+ +\frac{e^{c/(2w)}}{A'(t_-(w))}=0,
+ \qquad t_\pm(w)=\frac{1\pm\sqrt{1-4w}}2.
+\]
+Both summands are nonzero. All jets of their sum vanish, even on the
+\'etale locus. The actual interval uses opposite orientations on these
+two branches; this is why the signed path data in the main proof
+cannot be replaced by local jet rigidity.
+
+\subsection{A different, conditional certificate for a complete system}
+If an exact full transform is embedded in a rational system $Y'=MY$
+and $h=\ell_0Y$, define observation rows
+$\ell_{j+1}=\ell_j'+\ell_jM$. Then $h^{(j)}=\ell_jY$.
+If a coordinate row $e_r^{\mathsf T}$ lies in the rational span of
+these rows and $Y_r\not\equiv0$, one necessarily has $h\not\equiv0$.
+Indeed, $h\equiv0$ would force $Y_r\equiv0$ by the displayed row relation.
+This criterion requires actual observation of a nonzero coordinate;
+finiteness of the system alone is not sufficient.
+
+For a nonconstant linear polynomial $f=ax+by+c$, let
+$q=(w-a)(w-b)$ and take
+\[
+ Y=(\HH,e^{c/w},1)^{\mathsf T},\qquad
+ M=\begin{pmatrix}0&-1/q&0\\0&-c/w^2&0\\0&0&0\end{pmatrix},
+ \qquad \ell_0=(1,0,-1/w).
+\]
+The system follows by integrating the exponential generating series,
+and $h=\HH-1/w$ is the exact positive-moment output. Direct differentiation
+gives
+\[
+ \det\begin{pmatrix}\ell_0\\\ell_1\\\ell_2\end{pmatrix}
+ =\frac{-(a+b+c)w^2+(2ab+c(a+b))w-cab}{q^2w^4}.
+\]
+Its numerator is identically zero only if $a=b=c=0$:
+from $c=-a-b$, the middle coefficient gives $a^2+b^2=0$,
+and the last gives $ab(a+b)=0$, forcing $a=b=0$.
+Thus in the nonconstant case all coordinates, including $1$, are
+observed and $h$ cannot vanish identically. No analogous universal
+observation assertion in higher degree is needed or claimed here.
+
+\section{A collision with incomparable decompositions}\label{app:collision}
+Here is a concrete instance of Proposition~\ref{prop:arithmetic}.
+Let $D\ge6$ and suppose
+\[
+ A(t)=T_6(2t-1)-1,\qquad
+ T_6(z)=32z^6-48z^4+18z^2-1.
+\]
+It admits both $T_6=T_2\circ T_3$ and $T_6=T_3\circ T_2$, where
+$T_2(z)=2z^2-1$ and $T_3(z)=4z^3-3z$. The corresponding block sizes
+are incomparable, and $A(0)=A(1)=0$.
+The three points over the nonzero critical value $-2$ are
+\[
+ c_-=\frac{2-\sqrt3}{4},\qquad c_0=\frac12,\qquad
+ c_+=\frac{2+\sqrt3}{4}.
+\]
+They have local degree two, with quadratic coefficients
+$A''(c)/2$ equal to $288,72,288$, respectively. The positive
+critical-point weights in \eqref{eq:positive-pairing} are therefore
+$1/576,1/144,1/576$. Rationality of $\HH$ would force
+\[
+ e^{-A_1(c_-)/(2D)}+4e^{-A_1(1/2)/(2D)}
+                  +e^{-A_1(c_+)/(2D)}=0.
+\]
+For algebraic layers this contradicts Lindemann--Weierstrass after equal
+exponents are grouped. There are no restrictions on the subsequent
+layers. Algebraic specialization gives the corresponding nonvanishing
+statement with arbitrary complex coefficients. The computation illustrates
+why neither colliding critical points, incomparable block systems, nor
+zero endpoint values are omitted by the proof.
+
+\paragraph{Reproducibility.}
+The source bundle includes an exact $\Q(\sqrt3)$ calculation of the
+identities in this appendix, and symbolic checks of the rational
+connection, observation determinant, root filter, radial normalization,
+and branch-change examples. These finite checks are separate from the
+analytic and representation-theoretic proofs.
+\small
+\begin{thebibliography}{99}
+\bibitem{Baker}
+A.~Baker, \emph{Transcendental Number Theory}, Cambridge Mathematical
+Library, Cambridge University Press, 1990, Chapter~1.
+
+\bibitem{FC}
+A.~van~den~Essen, D.~Wright and W.~Zhao,
+\emph{On the Image Conjecture}, J. Algebra \textbf{340} (2011),
+211--224.
+\href{https://doi.org/10.1016/j.jalgebra.2011.04.036}{doi:10.1016/j.jalgebra.2011.04.036}.
+\href{https://arxiv.org/abs/1008.3962v2}{arXiv:1008.3962v2}.
+
+\bibitem{LiuSun}
+D.~Liu and X.~Sun, \emph{The factorial conjecture and images of locally
+nilpotent derivations}, Bull. Aust. Math. Soc. \textbf{101} (2020),
+71--79.
+\href{https://doi.org/10.1017/S0004972719000546}{doi:10.1017/S0004972719000546}.
+
+\bibitem{PM}
+F.~Pakovich and M.~Muzychuk, \emph{Solution of the polynomial moment
+problem}, Proc. Lond. Math. Soc. (3) \textbf{99} (2009), 633--657.
+\href{https://doi.org/10.1112/plms/pdp010}{doi:10.1112/plms/pdp010}.
+\href{https://arxiv.org/abs/0710.4085v2}{arXiv:0710.4085v2}.
+Theorem~3.1 is the rational representation input; the path arguments
+are in Sections~2.1--2.2 and Proposition~4.1.
+
+\bibitem{EIT}
+C.~D.~Long and A.-A.~Le~Blanc, \emph{Algebraic Exponential Integrals:
+Transcendence and Linear Relations}, EIT~I, research manuscript, 2026,
+Corollary \texttt{cor:single}.
+\href{https://github.com/long-mathematics/exponential-integral-theorem/blob/22d98c4f27e606b5b25fa673c33f9c56c53cc86b/papers/01-exponential-integral-theorem/exponential-integral-theorem.tex}{Pinned LaTeX source},
+commit \texttt{22d98c4f27e606b5b25fa673c33f9c56c53cc86b},
+consulted 7 October 2026. This is the external input to
+Theorem~\ref{thm:eit}; its proof is not reproduced here.
+
+\bibitem{Moura}
+C.~Moura, \emph{Bounds for the vanishing order for solutions of a linear
+differential system}, J. Dynam. Control Systems \textbf{9} (2003),
+no.~1, 73--88.
+\href{https://doi.org/10.1023/A:1022155217548}{doi:10.1023/A:1022155217548}.
+
+\bibitem{MouraHyper}
+C.~Moura, \emph{On the multiplicity of the hyperelliptic integrals},
+preprint, 2003, Section~2, Theorem~1.
+\href{https://arxiv.org/abs/math/0312323}{arXiv:math/0312323}.
+Used for the stated ordinary-point multiplicity estimate.
+
+\bibitem{OAIMultiplicity}
+OpenAI, \emph{One Rational Matrix Hitting Point for Noncommutative
+Formulas}, manuscript dated 24 September 2026, section
+\emph{A bound on the order of vanishing}, in \texttt{openai/math}.
+\href{https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/One-Rational-Matrix-Hitting-Point-for-Noncommutative-Formulas-September-24-2026/build/multiplicity.tex}{Manuscript proof};
+\href{https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/Algebra/FormulaHitting/Multiplicity.lean}{Lean source},
+\texttt{OAI.NCHitting.}\allowbreak\texttt{system\_multiplicity}.
+The manuscript attributes the estimate to Moura. Sources pinned to
+commit \texttt{adc7f1241b42e322a6451854ab7e4b4c146bf78a},
+consulted 7 October 2026.
+
+\bibitem{OAIJets}
+OpenAI, \emph{\'Etale analytic jet lemmas},
+\href{https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/AlgebraicGeometry/Seshadri/Jets/EtaleAnalytic.lean}{\texttt{EtaleAnalytic.lean}},
+\texttt{etale\_tangent\_separates}, in \texttt{openai/math},
+commit \texttt{adc7f1241b42e322a6451854ab7e4b4c146bf78a},
+consulted 7 October 2026. Cited for research provenance, not as an
+input to the main proof.
+
+\bibitem{OAIContinuation}
+OpenAI, \emph{Rigidity of Smooth Billiards with a Continuous Caustic
+Collar}, manuscript dated 24 September 2026, section
+\emph{Endpoint determination and meromorphic continuation}.
+\href{https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/preprints/Rigidity-of-Smooth-Billiards-with-a-Continuous-Caustic-Collar-September-24-2026/build/sections/04-continuation.tex}{Pinned section source},
+\texttt{openai/math}, commit
+\texttt{adc7f1241b42e322a6451854ab7e4b4c146bf78a},
+consulted 7 October 2026. Cited for research provenance only; the
+billiard hypotheses are not asserted for the present integrals.
+\end{thebibliography}
+\end{document}
