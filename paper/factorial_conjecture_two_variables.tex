@@ -1,0 +1,998 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1.04in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,amsmath,amssymb,amsthm,mathtools,mathrsfs,microtype}
+\usepackage{enumitem,booktabs,array}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Factorial Moments in Two Variables: Exact Leaf Transport and Trace Orthogonality},pdfauthor={Christopher D. Long}}
+\setlength{\emergencystretch}{2em}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}\newtheorem{remark}[theorem]{Remark}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Qb}{\overline{\mathbb Q}}
+\newcommand{\Lfac}{\mathcal L}
+\newcommand{\CC}{\mathcal C}
+\newcommand{\HH}{\widehat G}
+\newcommand{\dd}{\,d}
+\newcommand{\Crit}{\operatorname{CritVal}}
+\newcommand{\Span}{\operatorname{span}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\UC}{U_d^{\C}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\one}{\mathbf 1}
+\title{Factorial Moments in Two Variables:\\
+Exact Leaf Transport and Trace Orthogonality}
+\author{Christopher D. Long\\\small\texttt{galizur@gmail.com}}
+\date{7 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $\Lfac(x^ay^b)=a!b!$. We give a proof of the two-variable Factorial
+Conjecture using the explicitly stated single-integral nonvanishing theorem
+of EIT~I for the constant projective leading case. For a nonconstant
+projective leading polynomial, an exact radial Mittag--Leffler transform
+produces vanishing leaf germs containing both a pole density and a
+Volterra correction. The corrections admit continuation with the complete
+integration histories retained; at a nonzero terminal critical value they
+have no negative Puiseux coefficients. Polynomial path-module theory
+therefore forces the weighted leading coefficient to annihilate the top
+rational monodromy component. The unweighted inverse-derivative vector
+belongs to that component, by a zero-trace identity on every proper
+composition block. Conjugate pairing and Lindemann--Weierstrass exclude
+all nonzero critical values. Endpoint logarithms dispose of the remaining
+pure powers. All factorial-specific constructions are proved here. Appendices give exact continuation
+examples and effective differential-system certificates not used in the
+main proof.
+\end{abstract}
+
+\section{The statement and the inputs}\label{sec:introduction}
+Define the complex-linear functional $\Lfac:\C[x,y]\to\C$ by
+$\Lfac(x^ay^b)=a!b!$ for $a,b\ge0$. The Factorial Conjecture was introduced
+by van den Essen, Wright and Zhao~\cite{FC}. Liu and Sun proved the
+homogeneous two-variable case~\cite{LiuSun}. The present argument treats
+arbitrary lower homogeneous terms.
+
+For $0\ne f\in\C[x,y]$ of total degree $D\ge1$, write
+\begin{equation}\label{eq:radial-polynomial}
+ P(t,r)=f(rt,r(1-t))=\sum_{j=0}^{D}A_j(t)r^{D-j},
+ \qquad \deg A_j\le D-j,\qquad A=A_0.
+\end{equation}
+Thus $A(t)=f_D(t,1-t)$ is nonzero. Its degree $d$ can be smaller than $D$.
+We call the cases $d>0$ and $d=0$ \emph{nonflat} and \emph{flat}, respectively.
+
+\begin{theorem}[Nonflat nonvanishing]\label{thm:nonflat}
+If $0\ne f\in\C[x,y]$ has nonconstant $A$, then $\Lfac(f^n)\ne0$ for some
+$n\ge1$, and in fact for infinitely many $n$.
+\end{theorem}
+
+\begin{theorem}[EIT~I: the external nonvanishing input]\label{thm:eit}
+Let $q\in\Qb[t]$ be nonconstant, let $a,b\in\Qb$ be distinct, and let
+$\xi\in\Qb^\times$. Then
+\[
+ \int_a^b e^{\xi q(t)}\dd t\ne0.
+\]
+\end{theorem}
+This is the nonvanishing part of the single-integral corollary of
+EIT~I~\cite[Corollary \texttt{cor:single}]{EIT}; that result also asserts
+transcendence. The integral can be taken along any finite path, since its
+integrand is entire. No extension to arbitrary amplitudes is being used.
+
+\begin{corollary}[FC(2), using Theorem~\ref{thm:eit}]\label{cor:fc2}
+For every $f\in\C[x,y]$,
+\[
+ \bigl(\Lfac(f^n)=0\text{ for every }n\ge1\bigr)\quad\Longrightarrow\quad f=0.
+\]
+Equivalently, every nonzero $f$ has infinitely many nonzero factorial moments.
+\end{corollary}
+
+\paragraph{Direct dependencies and scope.}
+The nonflat proof uses Lindemann--Weierstrass and the top-component
+irreducibility theorem for rational permutation modules of groups
+containing a full cycle~\cite[Theorem~3.1]{PM}. We state precisely the part
+of that representation theorem needed below, and prove the endpoint
+averaging, planar separation, and resulting path-module containment in
+our notation. We do not reprove the underlying Schur-ring classification.
+The flat step uses only Theorem~\ref{thm:eit}. Its source is a separate
+research manuscript whose proof uses $E$-function lifting and
+Fourier--Laplace theory; those are transitive, not additional direct,
+inputs here. Apart from standard complex analysis, algebraic inverse
+branches, and the Nullstellensatz and L\"uroth theorems, all remaining
+arguments are included.
+\paragraph{Manuscript status.}
+This is an unrefereed research manuscript, not a Lean formalization.
+The EIT dependence of Corollary~\ref{cor:fc2} is explicit; the nonflat
+argument is independent of EIT. The exact checks accompanying the source
+verify particular identities, not the universal theorem.
+
+\section{Normalization and the exact kernel}\label{sec:kernel}
+\begin{lemma}[Algebraic specialization]\label{lem:specialization}
+A complex counterexample with specified total degree $D$ and specified
+positive degree $d$ of $A$ would give a counterexample over $\Qb$ with the
+same degrees. The same assertion holds with the normalized flat top $A=1$.
+\end{lemma}
+\begin{proof}
+Use the finitely many coefficients of a polynomial of degree at most $D$
+as variables. All equations $\Lfac(f^n)=0$ have rational coefficients.
+Impose the linear conditions specifying $\deg A=d$, and adjoin the inverse
+of its degree-$d$ coefficient. In the flat case impose $A=1$, after
+scaling the proposed counterexample by its nonzero constant leading value.
+The assumed complex point makes this ideal proper. Noetherianity and the
+Nullstellensatz over $\Qb$ give an algebraic point satisfying every
+moment equation. The inverse variable preserves $d$ and $D$: restriction
+of a homogeneous form to $x+y=1$ is injective. Neither the monodromy group
+nor the decomposition lattice has to survive specialization, since the
+contradiction is uniform in both.
+\end{proof}
+
+Set
+\begin{align}
+ M_n&=\frac{\Lfac(f^n)}{\Gamma(Dn+2)}, &
+ \HH(w)&=\frac1w\sum_{n\ge0}M_nw^{-n},\label{eq:normalized}\\
+ E_{D,2}(z)&=\sum_{n\ge0}\frac{z^n}{\Gamma(Dn+2)}, &
+ \CC(w,t)&=\frac1w\int_0^\infty e^{-r}r
+ E_{D,2}\!\left(\frac{P(t,r)}w\right)\dd r.\label{eq:kernel}
+\end{align}
+Termwise integration of a polynomial gives
+\[
+ \Lfac(f^n)=\int_0^\infty\!\int_0^\infty e^{-x-y}f(x,y)^n\dd x\dd y
+ =\int_0^1\!\int_0^\infty e^{-r}rP(t,r)^n\dd r\dd t.
+\]
+The last equality uses the Jacobian $r$ of $x=rt$, $y=r(1-t)$.
+For sufficiently large $|w|$ the resulting generating integral is normally
+convergent, and
+\begin{equation}\label{eq:full-transform}
+ \HH(w)=\int_0^1\CC(w,t)\dd t.
+\end{equation}
+Indeed, the root filter below bounds $E_{D,2}(z)$ by a polynomial factor
+times $e^{|z|^{1/D}}$, and $|P(t,r)|^{1/D}\le C(1+r)$ on a compact
+$t$-set. The same estimate justifies summation under the integral.
+All positive moments vanish exactly when $\HH(w)=1/w$ near infinity.
+
+Put $V=\{t:A(t)\ne0\}$. We need a coefficient on a finite cover, not a
+single-valued logarithmic coefficient on the entire base.
+\begin{lemma}[Exact local kernel and a continued coefficient]\label{lem:kernel}
+Near $w=A(t)\ne0$, a continued germ of the kernel has the form
+\begin{equation}\label{eq:local-kernel}
+ \CC(w,t)=\frac{E(t)}{w-A(t)}+
+ B_0(w,t)\log(w-A(t))+H(w,t),\qquad
+ E(t)=\exp\!\left(\frac{A_1(t)}{DA(t)}\right),
+\end{equation}
+where $B_0,H$ are locally jointly holomorphic. The residue is unchanged
+by continuation. For fixed $t\in V$, the only possible finite exceptional
+values for continuation in $w$ are $0,A(t)$, locally uniformly in $t$.
+
+The distinguished diagonal germ of $B_0$ extends to a holomorphic function
+$\mathscr B$ on
+\begin{equation}\label{eq:cover}
+ \mathscr X=\{(w,t,\rho):w\ne0,\ t\in V,\ \rho^D=A(t)/w\}.
+\end{equation}
+It is given by
+\begin{equation}\label{eq:global-B}
+ \mathscr B(w,t,\rho)=\frac{\rho^{D-1}}{DA(t)}
+ \sum_{m\ge1}\frac{(-1)^mF_m(t)}{(m-1)!}(1-\rho)^{m-1},
+\end{equation}
+where $F_m$ are defined in \eqref{eq:Laurent}. The series is entire in
+$1-\rho$, locally uniformly on $V$. The initial diagonal germ is the
+restriction with $\rho$ near $1$.
+\end{lemma}
+\begin{proof}
+Let $\omega=e^{2\pi i/D}$. Expansion of the exponentials gives the exact
+root filter
+\begin{equation}\label{eq:filter}
+ E_{D,2}(X^D)=\frac1{DX}\sum_{k=0}^{D-1}\omega^{-k}e^{\omega^kX}
+ -C_{D,1}(X),\quad
+ C_{D,1}=\begin{cases}X^{-1},&D=1,\\0,&D\ge2.\end{cases}
+\end{equation}
+Apply it only after splitting the radial integral at a sufficiently large
+$R$. Leave the compact radial part in its entire Mittag--Leffler form.
+
+On $V$, the exterior root with leading term $r$ and its inverse are
+\[
+ \Phi_t(r)=(P(t,r)/A(t))^{1/D}=r+p_1(t)+O(r^{-1}),\quad
+ \chi(t,Y)=Y-p_1(t)+O(Y^{-1}),\quad p_1=\frac{A_1}{DA}.
+\]
+The analytic inverse theorem at infinity gives convergent Laurent series,
+uniform on exterior disks for compact subsets of $V$. The chosen leading
+terms specify them uniquely; their coefficients are single-valued and
+holomorphic on $V$. Define
+\begin{equation}\label{eq:Laurent}
+ F(t,Y)=e^{Y-\chi(t,Y)}\frac{\chi(t,Y)\chi_Y(t,Y)}Y
+       =\sum_{m\ge0}F_m(t)Y^{-m}.
+\end{equation}
+Here $F_0=E$ and locally $|F_m(t)|\le CR_0^m$ for fixed $C,R_0$.
+With $\rho=(A(t)/w)^{1/D}$ near $1$, the summand singular at this diagonal is
+\begin{equation}\label{eq:singular-summand}
+ \frac{\rho^{D-1}}{DA(t)}
+ \int_{\Phi_t([R,\infty))}e^{-(1-\rho)Y}F(t,Y)\dd Y.
+\end{equation}
+In $\Re(1-\rho)>0$ the exterior image ray can be moved to a common positive
+ray. The far connector tends to zero exponentially, and the finite
+connector is entire in $1-\rho$, locally uniformly in $t$.
+
+Choose a starting point $R_1>R_0$ on that ray and put
+\[
+ J_m(\eta)=\int_{R_1}^\infty e^{-\eta Y}Y^{-m}\dd Y.
+\]
+Direct integration and integration by parts give
+\begin{align*}
+ J_0&=e^{-\eta R_1}/\eta,\\
+ J_1&=-\log\eta-\gamma-\log R_1-
+       \sum_{j\ge1}\frac{(-\eta R_1)^j}{j\,j!},\\
+ J_{m+1}&=\frac{e^{-\eta R_1}R_1^{-m}-\eta J_m}{m}\qquad(m\ge1).
+\end{align*}
+The logarithmic coefficient of $J_m$ is
+$(-1)^m\eta^{m-1}/(m-1)!$. For $m\ge1$ its remaining part is entire;
+on compact $\eta$-sets the recurrence bounds it by a fixed constant times
+$R_1^{1-m}+L^{m-1}/(m-1)!$. Combining this with the geometric bound on
+$F_m$ proves normal convergence of both continued series. Thus the tail is
+\[
+ \frac{E(t)}\eta+
+ \left(\sum_{m\ge1}\frac{(-1)^mF_m(t)}{(m-1)!}\eta^{m-1}\right)\log\eta
+ +\text{a function holomorphic near }\eta=0.
+\]
+This supplies exact continuation on the universal cover of $\eta\ne0$.
+Since
+\[
+ 1-\rho=\frac{w-A(t)}{DA(t)}+O((w-A(t))^2),
+\]
+\eqref{eq:singular-summand} has residue $E(t)$ and logarithmic coefficient
+\eqref{eq:global-B}. Changing $\log(1-\rho)$ to $\log(w-A(t))$ changes
+only a holomorphic remainder.
+
+The other root summands have parameters $1-\omega^k\rho$; their zeros all
+project to $w=A(t)$. At $\rho=1$ they are locally holomorphic for $k\ne0$.
+The compact part and the $D=1$ correction are holomorphic at every
+nonzero diagonal. This proves the claimed exceptional set and uniformity.
+A change of logarithm branch adds a function holomorphic on the cover,
+and cannot alter the pole residue.
+\end{proof}
+
+\begin{remark}[Canonical local coefficient versus continued germ]\label{rem:B-sheets}
+The local logarithmic coefficient of the complete kernel is canonical at
+its nonzero diagonal. The continuation of its distinguished germ, however,
+is $\mathscr B(w,t,\rho)$ on $\mathscr X$ and need not descend to the base
+$(w,t)$-space. If another root summand becomes singular, the identity
+$\omega^{-k}\rho^{D-1}=(\omega^k\rho)^{D-1}$ gives the same canonical
+local coefficient after reselecting that summand. It does not identify
+different continued root sheets. Every integral below retains its root
+parameter. Appendix~\ref{app:examples} gives an exact sign-changing example.
+\end{remark}
+
+\begin{lemma}[Normality near zeros of the top]\label{lem:normality}
+Near a zero of $A$, the original kernel integral is normally convergent
+for $w$ on any fixed compact set away from zero. On every bounded $t$-disk
+it is holomorphic in $t$ for all sufficiently large $|w|$.
+\end{lemma}
+\begin{proof}
+For $D>1$, locally uniformly,
+\[
+ |P(t,r)/w|^{1/D}\le |A(t)/w|^{1/D}r+C(1+r)^{1-1/D}.
+\]
+For $D=1$ the second term is bounded. Near a zero of $A$, or for $|w|$
+sufficiently large on a bounded $t$-disk, make the first coefficient
+less than $1/2$. The growth estimate from \eqref{eq:filter} is then
+integrably dominated by $e^{-r}$ times the displayed sublinear exponential
+and a polynomial. To compare with a continued germ, first fix the entire
+finite continuation path in $w$ away from zero, and shrink the
+$t$-neighborhood so this bound holds along that whole path. Uniqueness of
+continuation identifies that germ with the normally convergent integral.
+\end{proof}
+
+\section{Leaf identities and continuation with retained paths}\label{sec:transport}
+Choose a regular value $b$ different from $0,A(0),A(1)$. Let $T$ be an
+embedded finite star centered at $b$, with one arm to each distinct member
+of
+\[
+ \{0,A(0),A(1)\}\cup\Crit(A).
+\]
+The arms have disjoint interiors and are straight near their leaves.
+The inverse graph $\Gamma=A^{-1}(T)$ is a tree. Here is a useful direct
+justification. If $T$ has $s$ arms, then $\Gamma$ has $ds$ edges, $d$
+center vertices, and $ds-(d-1)$ leaf vertices: the total finite
+ramification of a degree-$d$ polynomial is $d-1$. It is connected because
+the local monodromies about the leaf values generate a transitive
+covering group; their cycles join precisely the incident lifted stars.
+Thus its Euler characteristic is $1$, and it is a tree. This is the usual
+polynomial inverse-tree construction~\cite[Section~2.1]{PM}.
+
+Let $\mu$ be its unique simple path from the actual point $0$ to the actual
+point $1$. Both $\mu$ and $[0,1]$ lie in a bounded disk. Lemma~\ref{lem:normality}
+therefore permits replacing the interval by $\mu$ in
+\eqref{eq:full-transform} for large $w$.
+Orient each target arm from its leaf $v$ toward $b$, and label the inverse
+branches over $b$ by $1,\ldots,d$. The path gives a vector
+$n_v\in\{0,1,-1\}^d$, recording the signed use of the lift in each sheet.
+With these orientations,
+\begin{equation}\label{eq:tree}
+ \HH(w)=\sum_v\int_v^b\sum_{i=1}^d n_{v,i}
+             \CC(w,t_i(u))t_i'(u)\dd u.
+\end{equation}
+This equality holds at infinity and on the chosen continuation off $T$.
+It retains every lift over each leaf.
+
+Fix $v\ne0$ and write $c_i=\lim_{u\to v}t_i(u)$ on its arm. For $w$
+near $v$, define the germ
+\begin{equation}\label{eq:leaf-germ}
+ \mathscr L_v(w)=\sum_i n_{v,i}
+ \left\{E(t_i(w))t_i'(w)+
+ \int_{c_i}^{t_i(w)}\mathscr B(w,t,\rho)\dd t\right\}.
+\end{equation}
+Initially the integrals are local near $c_i$. Their lifts to $\mathscr X_w$
+are selected by $\rho=1$ at the upper endpoint. Since $A(c_i)=v\ne0$,
+regular and ramified endpoints are both allowed.
+
+\begin{lemma}[Complete local singular extraction]\label{lem:local-extraction}
+If $\HH$ is rational, then $\mathscr L_v\equiv0$ for every nonzero leaf $v$.
+\end{lemma}
+\begin{proof}
+Put $z=w-v$ and $x=u-v$. Near the leaf, set
+\begin{align*}
+ a(x)&=\sum_i n_{v,i}E(t_i(v+x))t_i'(v+x),\\
+ b_0(z,x)&=\sum_i n_{v,i}
+ \mathscr B(v+z,t_i(v+x),\rho)t_i'(v+x),
+ \qquad \rho^D=(v+x)/(v+z),\quad\rho\sim1.
+\end{align*}
+These have convergent Puiseux expansions in $x$ with a common finite
+denominator; $b_0$ is also holomorphic in $z$. Every $x$-exponent is
+greater than $-1$, since a local inverse of degree $k$ has derivative
+$O(x^{1/k-1})$.
+
+All other edges in \eqref{eq:tree} are holomorphic in $w$ near $v$ on the
+chosen continuation. This follows from Lemma~\ref{lem:kernel} where
+$A(t)\ne0$, and from Lemma~\ref{lem:normality} near zero top values.
+The integrated local holomorphic remainder is holomorphic as well.
+After straightening the short arm, its relevant part is
+\[
+ \int_0^\epsilon
+ \left(\frac{a(x)}{z-x}+b_0(z,x)\log(z-x)\right)\dd x.
+\]
+A common nonzero linear rescaling of $x,z$ does not affect the following
+vanishing argument. Put
+$q(z,x)=\int_0^x b_0(z,s)\dd s$. This tends to zero at the lower endpoint.
+Integration by parts gives a holomorphic boundary term plus
+\begin{equation}\label{eq:corrected-cauchy}
+ \int_0^\epsilon\frac{a(x)+q(z,x)}{z-x}\dd x.
+\end{equation}
+In particular the sign of the correction is positive.
+
+There are finitely many fractional classes. Choose their representatives
+$-1<\delta\le0$ and write
+\[
+ a(x)+q(z,x)=\sum_\delta x^\delta h_\delta(z,x),
+\]
+where each $h_\delta$ is holomorphic in the ordinary variables $z,x$.
+Divide
+$h_\delta(z,x)=h_\delta(z,z)+(x-z)k_\delta(z,x)$.
+The $k_\delta$-term in \eqref{eq:corrected-cauchy} is holomorphic in $z$,
+by integrability of $x^\delta$. The only nonholomorphic term from this
+class is therefore
+\[
+ h_\delta(z,z)I_\delta(z),\qquad
+ I_\delta(z)=\int_0^\epsilon\frac{x^\delta}{z-x}\dd x.
+\]
+For $-1<\delta<0$, the singular part of $I_\delta$ is a nonzero multiple
+of $z^\delta$ on a fixed slit; scaling and the beta integral give a factor
+proportional to $\pi/\sin(\pi\delta)$. For $\delta=0$ it is $\log z$,
+up to a holomorphic function. Distinct fractional classes cannot cancel,
+and none is a meromorphic germ. If \eqref{eq:corrected-cauchy}, plus
+holomorphic terms, is rational, every $h_\delta(z,z)$ is zero. Hence
+\[
+ a(z)+\int_0^z b_0(z,x)\dd x=0.
+\]
+The change of variables $t=t_i(v+x)$ identifies this with
+\eqref{eq:leaf-germ}. This proves vanishing of the whole corrected germ,
+not only of its leading coefficient.
+\end{proof}
+
+\begin{remark}[The triangular coefficient equations]\label{rem:triangular}
+If $a(x)=\sum a_\alpha x^\alpha$ and
+$b_0(z,x)=\sum b_{p,\beta}z^p x^\beta$, the preceding identity is equivalent to
+\begin{equation}\label{eq:triangular}
+ a_\alpha+\sum_{p+\beta+1=\alpha}\frac{b_{p,\beta}}{\beta+1}=0
+ \qquad(\alpha>-1).
+\end{equation}
+It is not an identity for $a$ alone. For example,
+$-\sqrt{x}/(z-x)+(2\sqrt{x})^{-1}\log(z-x)$ is
+$\partial_x(\sqrt{x}\log(z-x))$, and its integral is holomorphic near
+$z=0$, although both densities are nonzero.
+\end{remark}
+
+Write $G_A$ for the inverse-branch monodromy group. Fix a terminal path
+from $b$ toward a nonzero critical value $\lambda$, with a final straight
+segment, avoiding zero and all critical values before its endpoint.
+For any negative Puiseux exponent $\alpha$, define the linear functional
+\begin{equation}\label{eq:coefficient-functional}
+ \Phi_{\lambda,\alpha}(e_i)=
+ [(w-\lambda)^\alpha]
+ \frac{\exp(A_1(t_i(w))/(Dw))}{A'(t_i(w))}
+\end{equation}
+using continuation along that path and a common Puiseux parameter.
+
+\begin{theorem}[Transport of the full leaf identity]\label{thm:transport}
+If $\HH$ is rational, $\Phi_{\lambda,\alpha}$ annihilates
+$\Q[G_A]n_v$ for every nonzero leaf $v$ and every $\alpha<0$.
+\end{theorem}
+\begin{proof}
+Let $U=\C\setminus(\{0\}\cup\Crit(A))$. Continue the zero germ
+$\mathscr L_v$ along its arm to $b$, and then along any path in $U$.
+Inverse branches continue and stay in $V$. For an individual integral
+in \eqref{eq:leaf-germ}, retain its path from the fixed $c_i$ and append
+the path of its moving upper endpoint. Lift the accumulated path to
+$\mathscr X_w$ with $\rho=1$ at that upper endpoint. The fixed lower
+root is allowed to change after a loop; it remains part of the data.
+
+Here is a precise local description. On a small $w$-disk $W$ away from
+zero choose a holomorphic root $s(w)^D=w$, and put
+\[
+ \Sigma=\{(t,\sigma):t\in V,\ \sigma^D=A(t)\},
+ \qquad \rho=\sigma/s(w).
+\]
+Then $\mathscr X|_W$ is identified with $W\times\Sigma$.
+The curve $\Sigma$ is locally parametrized by $t$, since $\sigma\ne0$,
+even at a critical point of $A$. The differential
+$\mathscr B(w,t,\sigma/s(w))\dd t$ is holomorphic on this product.
+A fixed compact lifted path integrates to a holomorphic function of $w$;
+a short appended piece has a jointly holomorphic local primitive.
+This constructs the continuation along each compact portion of the
+chosen path. At the moving endpoint $\sigma=s(w)$, so $\rho=1$ is
+preserved. Different roots at a fixed lower endpoint are never reset.
+
+Now approach $\lambda\ne0$, and suppose an endpoint tends to $c$ with
+$A(c)=\lambda$. Split the accumulated history into a fixed compact lifted
+path ending near $c$, and a short terminal piece. The first part is
+holomorphic on a disk about $\lambda$ by the product description. A
+point with $A(t)=w$ on that history causes no pole in $\mathscr B$.
+Near $(\lambda,c)$ the root with $\rho\sim1$ is holomorphic. A primitive
+$J(w,t)$ of the corresponding differential is jointly holomorphic, and
+the terminal piece is
+\[
+ J(w,t_i(w))-J(w,t_*).
+\]
+If $A$ has local degree $k$ at $c$, then
+$t_i(w)=c+O((w-\lambda)^{1/k})$. Thus this primitive has only
+nonnegative Puiseux exponents. The same holds for every retained history.
+Every negative coefficient of the continued identity comes solely from
+$E(t_i(w))t_i'(w)$.
+
+For each $g\in G_A$, choose a loop at $b$ realizing $g$, and then follow
+the fixed terminal path. The continued $\mathscr L_v$ is still zero, so
+its negative coefficient is $\Phi_{\lambda,\alpha}(g n_v)=0$.
+The complete histories can depend on more than the permutation $g$;
+no action of $G_A$ on those histories is asserted or needed.
+Their negative coefficients vanish, while the pole contribution depends
+only on $g$. Linear extension proves the theorem. Removing the extra
+regular point zero from the base, when zero is not critical, does not
+remove any permutation from its monodromy image.
+\end{proof}
+
+\section{The path module and the simultaneous trace identity}\label{sec:module}
+We use the bilinear pairing $\langle x,y\rangle=\sum_i x_i y_i$.
+Vector spaces are over $\Q$ until explicitly complexified.
+For the actual signed vectors in \eqref{eq:tree}, put
+\[
+ M=\sum_v\Q[G_A]n_v,\qquad M_{\ne0}=\sum_{v\ne0}\Q[G_A]n_v.
+\]
+\begin{lemma}[The zero leaf is algebraically redundant]\label{lem:zero-leaf}
+One has $\sum_v n_v=0$ coordinatewise, and $M_{\ne0}=M$.
+\end{lemma}
+\begin{proof}
+Each visited center vertex of $\mu$ has one entering and one leaving
+edge, contributing opposite signs to its sheet coordinate. Neither actual
+endpoint lies over $b$. Thus $n_0=-\sum_{v\ne0}n_v$; apply all monodromy
+elements. This makes no analytic assertion at $w=0$.
+\end{proof}
+
+Label sheets so a full infinity cycle is $(1\ 2\ \cdots\ d)$.
+For $k\mid d$, let $V_k\subset\Q^d$ consist of $k$-periodic vectors, and set
+\begin{equation}\label{eq:top-component}
+ D(G_A)=\{k\mid d:V_k\text{ is }G_A\text{-invariant}\},\qquad
+ U_d=\bigcap_{\substack{k\in D(G_A)\\k<d}}V_k^\perp,
+ \qquad \UC=U_d\otimes_\Q\C.
+\end{equation}
+The indicators of residue classes modulo $k$ span $V_k$. Because the
+cyclic subgroup is regular, every block system is of this form: the
+block containing the label $0$ in $\mathbb Z/d\mathbb Z$ is a subgroup,
+and its translates are all blocks. Invariance of its indicator span is
+equivalent to invariance of the partition. In polynomial monodromy these
+blocks correspond to decompositions $A=P\circ R$. The intermediate-field
+correspondence and L\"uroth's theorem give a rational generator; the
+unique point over infinity permits choosing that generator $R$ with
+its only pole at infinity. Then $R$, and also $P$, are polynomials.
+For $V_k$ one has $\deg P=k$ and $\deg R=d/k$.
+
+\begin{theorem}[Rational cyclic-module input, Pakovich--Muzychuk]
+\label{thm:rational-input}
+For a permutation group $G\le S_d$ containing a full $d$-cycle, the
+space $U_d$ defined as in \eqref{eq:top-component} is an irreducible
+rational $G$-module.
+\end{theorem}
+This is the top-component case of~\cite[Theorem~3.1]{PM}. Its proof uses
+the classification of rational Schur rings over a cyclic group. That
+representation-theoretic theorem, not the whole polynomial moment problem,
+is retained as an external input. The next lemmas prove its application
+to the actual path, following the geometry of~\cite[Section~2.2 and
+Proposition~4.1]{PM}.
+
+\begin{lemma}[A rational invariant subspace dichotomy]\label{lem:dichotomy}
+If $N\subset\Q^d$ is $G_A$-invariant, then either $U_d\subset N$ or
+$N\perp U_d$.
+\end{lemma}
+\begin{proof}
+The orthogonal projectors $P_N$ and $P_U$ have rational entries and commute
+with $G_A$. They therefore commute with the full cycle. Its centralizer
+consists of circulant matrices and is commutative, so $P_NP_U=P_UP_N$.
+The restriction of $P_N$ to $U_d$ is a $G_A$-equivariant idempotent.
+By Theorem~\ref{thm:rational-input} it is either zero or the identity.
+These are the two assertions. No absolute irreducibility is used.
+\end{proof}
+
+For an actual endpoint $p\in\{0,1\}$, let $I_p$ be the set of sheet labels
+whose inverse branches on its arm tend to $p$, and let $e_p=|I_p|$ be
+its local degree. Write
+\[
+ m_p=\frac1{e_p}\sum_{i\in I_p}e_i\in\Q^d.
+\]
+\begin{lemma}[Endpoint averaging]\label{lem:averaging}
+If $A(0)=A(1)$, then $m_0-m_1\in M$. If $A(0)\ne A(1)$, then
+$m_0,m_1\in M$.
+\end{lemma}
+\begin{proof}
+Average the vector $n_v$ over the finite cyclic group generated by the
+local monodromy at its leaf. On the labels tending to one point above
+$v$, the averaging replaces every coordinate by the mean over that
+local cycle. At an interior visit of $\mu$, one edge enters and another
+leaves the point; their sum on that cycle is zero. At an actual endpoint
+the sum is $+1$ for $0$, and $-1$ for $1$, under our orientations.
+Thus if the endpoint values agree, the average is $m_0-m_1$.
+Otherwise the two separate averages are $m_0$ and $-m_1$.
+All averages belong to $M$.
+\end{proof}
+
+\begin{lemma}[Planar separation of endpoint labels]\label{lem:separation}
+Let $\zeta=e^{2\pi i/d}$, and identify a label $i$ with $\zeta^{i-1}$.
+If $A(0)=A(1)$, the two endpoint label sets lie in disjoint open arcs
+of the circle. If their values differ, the sets have this property or
+share one point and, after that point is removed, lie on opposite open
+arcs cut out by it and one further circle point. In particular, their
+convex hulls are disjoint in the first case and meet at most in that
+single circle point in the second.
+\end{lemma}
+\begin{proof}
+Append to $T$ a simple arc from $b$ to infinity, meeting $T$ only at $b$.
+Its lifts are disjoint rays from the $d$ center vertices to infinity.
+Cut them off on a sufficiently large circle. Their cyclic order is that
+of the full infinity cycle, up to reversing it, which does not affect the
+assertion.
+For an endpoint $p$, take the union $K_p$ of its incident arm lifts and
+the attached rays. It is an embedded star joining $p$ to exactly the
+boundary labels $I_p$; intermediate center vertices have degree two.
+
+If the endpoints have the same value, $K_0$ and $K_1$ are disjoint.
+Between two consecutive rays of $K_0$, the two rays and the intervening
+boundary arc enclose a sector by the Jordan curve theorem. The connected
+star $K_1$, disjoint from $K_0$, lies in a single such sector. Its boundary
+labels consequently occur in one gap between consecutive labels of
+$I_0$. A chord with endpoints in the adjacent gaps strictly separates
+the two finite label sets. The singleton case is immediate by taking a
+small arc about that single label.
+
+For different endpoint values, two stars can share a center only if
+one lifted star contains both endpoints. There cannot be two such
+centers: the two paths from $0$ through these centers to $1$ would
+form a cycle in $A^{-1}(T)$. If there is no common center, the preceding
+argument applies. Otherwise $K_0\cap K_1$ is the one common ray from that
+center to the boundary. The same Jordan separation, now cutting along
+the common ray, puts all other labels of $K_1$ in a single sector of
+$K_0$ adjacent to that ray. The two sets are separated by a chord
+through their common boundary label and a point in the opposite gap.
+The two convex hulls can meet only at the common label. This also covers
+the case when one star has only the common ray.
+\end{proof}
+
+\begin{proposition}[The actual path contains the top component]
+\label{prop:path-module}
+For $d\ge2$, $U_d\subset M$.
+\end{proposition}
+\begin{proof}
+Put $z=(1,\zeta,\ldots,\zeta^{d-1})$. The sum of its entries on every
+residue class modulo a proper divisor $k$ is zero. Thus $z\in\UC$.
+The number $\langle m_p,z\rangle$ is the arithmetic mean of the roots
+of unity labeled by $I_p$.
+If the endpoint values agree, Lemma~\ref{lem:separation} gives disjoint
+convex hulls, so these two means differ. Lemma~\ref{lem:averaging}
+therefore supplies a vector in $M$ pairing nontrivially with $z$.
+If the values differ, both means cannot be zero: their convex hulls
+are disjoint or meet only on the unit circle. At least one of the two
+vectors in Lemma~\ref{lem:averaging} again pairs nontrivially with $z$.
+Hence $M$ is not orthogonal to $U_d$, and Lemma~\ref{lem:dichotomy}
+gives $U_d\subset M$.
+\end{proof}
+This is the needed path-module statement of~\cite[Proposition~4.1]{PM},
+with its endpoint and sign conventions established here. It allows
+ramified endpoints and equal or zero endpoint values. A regular extra
+leaf at zero contributes no active lift unless it is an endpoint value.
+
+\begin{corollary}\label{cor:annihilation}
+If $\HH$ is rational, every functional \eqref{eq:coefficient-functional}
+with $\lambda\ne0$ and $\alpha<0$ annihilates $\UC$.
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:transport} gives annihilation of $M_{\ne0}$.
+Lemma~\ref{lem:zero-leaf} and Proposition~\ref{prop:path-module} give
+$U_d\subset M=M_{\ne0}$. Extend scalars.
+\end{proof}
+
+\begin{lemma}[Simultaneous trace orthogonality]\label{lem:trace}
+For every regular $w$, in the continued sheet ordering,
+\begin{equation}\label{eq:inverse-derivative}
+ u(w)=\left(\frac1{A'(t_1(w))},\ldots,\frac1{A'(t_d(w))}\right)\in\UC.
+\end{equation}
+Every Puiseux coefficient vector of $u$ also belongs to $\UC$.
+\end{lemma}
+\begin{proof}
+Take any proper $k\in D(G_A)$ and the corresponding decomposition
+$A=P\circ R$, with $r=\deg R=d/k\ge2$. A block over $w$ is a fiber
+$R^{-1}(\xi)$ with $P(\xi)=w$. Regularity gives $P'(\xi)\ne0$ and
+$r$ distinct points in that fiber. The block trace is
+\begin{equation}\label{eq:block-trace}
+ \sum_{i\text{ in block}}\frac1{A'(t_i(w))}
+ =\frac1{P'(\xi)}\sum_{R(c)=\xi}\frac1{R'(c)}=0.
+\end{equation}
+Indeed, in the partial fractions
+\[
+ \frac1{R(t)-\xi}=\sum_{R(c)=\xi}\frac1{R'(c)(t-c)},
+\]
+the coefficient of $t^{-1}$ is zero since the left side is $O(t^{-r})$.
+Block indicators span $V_k$, so $u\perp V_k$. Intersect over all proper
+$k$. The relations are constant rational equations, and consequently
+hold coefficientwise in every continued Puiseux expansion.
+\end{proof}
+The intersection in this argument treats all proper decompositions at
+once. It imposes no constancy condition on a weighted vector along any
+one chosen block system.
+
+\section{The arithmetic obstruction and the nonflat conclusion}\label{sec:arithmetic}
+The next proposition applies to the top two layers of any algebraically
+specialized polynomial; it does not impose genericity on their coefficients.
+
+\begin{proposition}[Nonzero critical values are detected]\label{prop:arithmetic}
+Suppose $A,A_1\in\Qb[t]$, $\deg A=d\ge2$, and all negative coefficient
+functionals in \eqref{eq:coefficient-functional} at nonzero critical
+values annihilate $U_d$. Then $A$ has no nonzero critical value.
+\end{proposition}
+\begin{proof}
+Suppose $\lambda\ne0$ is a critical value. Let $K\ge2$ be the largest
+local degree of $A$ among the points above $\lambda$, and put
+$\alpha=1/K-1<0$. At a point $c$ of local degree $K$, write
+\[
+ A(c+s)=\lambda+a_cs^K+O(s^{K+1}),\qquad a_c\ne0.
+\]
+The $K$ inverse branches there have convergent expansions
+\[
+ t_i(w)=c+b_c\zeta_i(w-\lambda)^{1/K}
+              +O((w-\lambda)^{2/K}),
+ \qquad b_c^K=a_c^{-1},\quad \zeta_i^K=1.
+\]
+Let $\beta$ be the coefficient vector at exponent $\alpha$ in
+$u(w)$ from \eqref{eq:inverse-derivative}. On these branches,
+$\beta_i=b_c\zeta_i/K$. At a point of smaller local degree $k<K$,
+the first exponent $1/k-1$ is strictly larger than $\alpha$, so
+$\beta_i=0$. In particular, $\beta\ne0$, its entries are algebraic,
+and Lemma~\ref{lem:trace} gives $\beta\in\UC$.
+
+Since $A(t_i(w))=w$ and $\lambda\ne0$, the exponential weight is
+holomorphic in the local inverse coordinate. Its constant term is
+$\exp(A_1(c_i)/(D\lambda))$, and all other terms have positive
+Puiseux exponent. Thus the coefficient at $\alpha$ in the weighted
+inverse-derivative vector is exactly
+\begin{equation}\label{eq:weighted-leading}
+ \phi_i=\begin{cases}
+ \beta_i\exp(A_1(c_i)/(D\lambda)),&\beta_i\ne0,\\
+ 0,&\beta_i=0.
+ \end{cases}
+\end{equation}
+The maximal choice of $K$ is what excludes contributions from smaller
+ramification indices or nonconstant terms of the weight.
+
+By hypothesis $\phi$ is bilinearly orthogonal to $\UC$. Since $U_d$
+is defined over $\Q$, its complexification is preserved by conjugation.
+Consequently $\overline\beta\in\UC$, and
+\begin{equation}\label{eq:positive-pairing}
+ 0=\langle\phi,\overline\beta\rangle
+  =\sum_{\beta_i\ne0}|\beta_i|^2
+       \exp\!\left(\frac{A_1(c_i)}{D\lambda}\right).
+\end{equation}
+All exponents and coefficients in this expression are algebraic.
+After equal exponents are grouped, each coefficient is a strictly
+positive real algebraic number. At least one group occurs.
+Lindemann--Weierstrass~\cite{Baker} makes the exponentials of distinct
+algebraic numbers linearly independent over $\Qb$, contradicting
+\eqref{eq:positive-pairing}.
+\end{proof}
+
+\begin{remark}
+Grouping by critical points instead gives
+\[
+ \sum_{\substack{A(c)=\lambda\\e_c=K}}
+ \frac{(a_c\overline{a_c})^{-1/K}}{K}
+ \exp\!\left(\frac{A_1(c)}{D\lambda}\right)=0,
+\]
+where the positive real root is intended. This records explicitly that
+local root choices do not affect the positive coefficients. The
+positivity is created by the conjugate pairing, not by the original
+oriented interval or by the complex exponentials.
+\end{remark}
+
+\begin{lemma}[Only zero critical values]\label{lem:pure-power}
+If all critical values of a polynomial $A$ of degree $d\ge2$ are zero,
+then $A(t)=a(t-c)^d$ for some $a\ne0$.
+\end{lemma}
+\begin{proof}
+Every root of $A'$ is a root of $A$. If the distinct roots of $A$ have
+multiplicities $m_1,\ldots,m_q$, their multiplicities in $A'$ are
+exactly $m_j-1$. They therefore account for $d-q$ roots of $A'$.
+By hypothesis they account for all $d-1$, so $q=1$.
+\end{proof}
+
+\begin{lemma}[The endpoints exclude pure powers]\label{lem:endpoints}
+Let $f\in\Qb[x,y]$ have $A(t)=a(t-c)^d$, $a\ne0$, $d\ge1$.
+Then $\HH$ is not rational.
+\end{lemma}
+\begin{proof}
+Every nonzero value of $A$ is regular. At an actual endpoint $p$
+with $A(p)=v\ne0$, the constant logarithmic coefficient of the leaf
+integral is, with its orientation, $E(p)/A'(p)$. This follows either
+from Lemma~\ref{lem:local-extraction} or directly from
+\eqref{eq:local-kernel}: the pole density has that constant term,
+while the Volterra correction starts at order $w-v$.
+Unramified preimages of a leaf have graph degree one, so only the
+actual endpoints can be active above this regular value.
+
+If $A(0)\ne A(1)$, one endpoint has a nonzero value different from the
+other endpoint value. Its nonzero logarithmic coefficient cannot cancel.
+If the endpoint values agree, their common value $v$ cannot be zero,
+since $A$ has just one distinct root. Rationality would give
+\[
+ \frac{\exp(A_1(0)/(Dv))}{A'(0)}
+   =\frac{\exp(A_1(1)/(Dv))}{A'(1)}.
+\]
+The exponential of the algebraic difference of the two exponents is
+therefore algebraic. Hermite--Lindemann forces that difference to be
+zero; the equality then forces $A'(0)=A'(1)$. But
+\[
+ A'(0)=\frac{dv}{-c},\qquad A'(1)=\frac{dv}{1-c},
+\]
+which are unequal. When $d=1$, equal endpoint values are already
+impossible. These cases exhaust the possibilities.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:nonflat}]
+Suppose all positive factorial moments of a nonflat $f$ vanish.
+Lemma~\ref{lem:specialization} gives such a polynomial with algebraic
+coefficients. Its transform is $\HH=1/w$. If $d\ge2$,
+Corollary~\ref{cor:annihilation} and Proposition~\ref{prop:arithmetic}
+exclude every nonzero critical value. Lemma~\ref{lem:pure-power}
+then makes $A$ a pure power. If $d=1$, it is already a translated
+pure power. Lemma~\ref{lem:endpoints} contradicts rationality in
+both cases.
+
+Finally, if only finitely many moments of a nonflat $f$ were nonzero,
+choose $N\ge1$ such that $\Lfac(f^n)=0$ for every $n\ge N$.
+The nonzero polynomial $f^N$ has nonconstant projective top $A^N$
+and every positive moment zero, contrary to the first assertion.
+\end{proof}
+
+\section{The flat case and the EIT input}\label{sec:flat}
+The radial estimate below is independent of the monodromy argument.
+It shows exactly where the EIT theorem enters.
+
+\begin{lemma}[Uniform radial limit]\label{lem:radial-limit}
+On every compact $t$-set on which $A$ does not vanish,
+\begin{equation}\label{eq:radial-limit}
+ \frac1{\Gamma(Dn+2)}\int_0^\infty e^{-r}rP(t,r)^n\dd r
+ =A(t)^n\left[\exp\!\left(\frac{A_1(t)}{DA(t)}\right)+o(1)\right],
+\end{equation}
+with a uniform error inside the brackets.
+\end{lemma}
+\begin{proof}
+For $\mathbf k=(k_1,\ldots,k_D)\in\mathbb N^D$, put
+$K=\sum_jk_j$ and $J=\sum_jj k_j$. The multinomial expansion and
+termwise radial integration give terms
+\[
+ A^{n-K}\prod_{j=1}^D\frac{A_j^{k_j}}{k_j!}\,C_{n,\mathbf k},
+ \qquad
+ C_{n,\mathbf k}=\frac{n!}{(n-K)!}
+     \frac{\Gamma(Dn-J+2)}{\Gamma(Dn+2)}\quad(K\le n).
+\]
+Set $C_{n,\mathbf k}=0$ for $K>n$. The inequalities $K\le J\le DK$
+show $0\le C_{n,\mathbf k}\le1$. Indeed, the smallest $K$ factors
+in the denominator product dominate the numerator factors:
+\[
+ Dn-J+2+j\ \ge\ D(n-K)+2+j\ \ge\ n-K+1+j
+ \qquad(0\le j<K).
+\]
+These denominator factors are present because $J\ge K$; all remaining
+ones are at least one. The empty-product case $K=0$ is immediate.
+For fixed $\mathbf k$,
+\[
+ C_{n,\mathbf k}\sim D^{-J}n^{K-J}.
+\]
+After division by $A^n$, only the terms $k_2=\cdots=k_D=0$ survive,
+and their sum is $\exp(A_1/(DA))$.
+On the compact set, all absolute terms are bounded by
+\[
+ \prod_{j=1}^D\frac{(M_j/a_*)^{k_j}}{k_j!},
+ \qquad M_j=\max|A_j|,\quad a_* =\min|A|>0.
+\]
+This is summable over $\mathbb N^D$ and proves uniform dominated
+convergence, including $D=1$.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:fc2}]
+The nonflat case is Theorem~\ref{thm:nonflat}, and a nonzero constant
+polynomial is immediate. Suppose $D\ge1$ and $A$ is constant.
+It is nonzero, so scaling $f$ permits $A=1$. If all positive moments
+vanish, specialize algebraically with this normalization retained.
+Equation~\eqref{eq:radial-limit} gives
+\[
+ \lim_{n\to\infty}M_n=\int_0^1\exp\!\left(\frac{A_1(t)}D\right)\dd t.
+\]
+When $A_1$ is constant this limit is a nonzero exponential.
+Otherwise Theorem~\ref{thm:eit} applies with $q=A_1$, $a=0$, $b=1$
+and $\xi=1/D$. Its hypotheses hold over $\Qb$, and the amplitude is
+exactly $\dd t$. The limit is again nonzero, contradicting $M_n=0$
+for every $n\ge1$.
+The infinitely-many assertion follows by applying the result to $f^N$
+if a tail of its factorial moments were zero.
+\end{proof}
+
+\paragraph{Research provenance and assistance.}
+During the development of this argument, the \texttt{openai/math}
+release suggested examining local jet separation, differential-system
+multiplicity, and continuation of complete branch data
+\cite{OAIJets,OAIMultiplicity,OAIContinuation}.
+These were prompts for proof exploration, not theorems transferred into
+the FC(2) argument. In particular, local \'etale rigidity does not imply
+injectivity of a sum over sheets, and the cited billiard continuation
+results are not applied here. The main proof uses none of the release's
+results. Appendix~\ref{app:certificates} records the separate finite-jet
+application of Moura's classical estimate, together with its formal
+proof in the release. ChatGPT assisted with exploration, drafting,
+symbolic checking and review; the author is responsible for the
+mathematical claims and their attribution.
+
+\appendix
+
+\section{Exact continuation examples}\label{app:examples}
+The examples in this appendix are independent checks of the continuation
+conventions. None is an input to Sections~\ref{sec:arithmetic}--\ref{sec:flat}.
+
+\subsection{The pole alone has the wrong jump}
+For $f=3x+2y+1$, one has $D=1$ and $A(t)=2+t$. Its exponential
+generating series is
+\[
+ \sum_{n\ge0}\frac{\Lfac(f^n)}{n!}z^n
+       =\frac{e^z}{(1-3z)(1-2z)}.
+\]
+Integrating the series and substituting $z=1/w$ gives the exact identities
+\[
+ \HH(w)=\int_0^{1/w}\frac{e^z}{(1-3z)(1-2z)}\dd z,
+ \qquad \HH'(w)=-\frac{e^{1/w}}{(w-3)(w-2)}.
+\]
+Counterclockwise continuation around $3$ therefore gives
+$\Delta_3\HH=-2\pi i e^{1/3}$. In contrast, the pole integral alone is
+\[
+ C_0(w)=\int_2^3\frac{e^{1/u}}{w-u}\dd u,
+ \qquad \Delta_3 C_0=-2\pi i e^{1/w}.
+\]
+The difference is a nonconstant analytic germ. For this family,
+$\mathscr B(w,t)=e^{1/A(t)}/A(t)^2$, and the corrected branch germ
+at a lower endpoint with value $v$ is
+\[
+ e^{1/w}+\int_v^w\frac{e^{1/u}}{u^2}\dd u=e^{1/v}.
+\]
+Thus the correction, while one local singular order softer, changes the
+entire jump. A leading-pole identity cannot be substituted for
+\eqref{eq:leaf-germ}.
+
+\subsection{A coefficient that changes root sheets}
+Take $D=2$ and $P=Ar^2+c$, where $c\ne0$ and $A=A(t)\ne0$.
+The coefficient formula can be computed independently of radial
+reversion. On writing $n=m+k$, the duplication formula gives
+\[
+ \binom{m+k}{k}\frac{\Gamma(2m+2)}{\Gamma(2m+2k+2)}
+ =\frac{4^{-k}\Gamma(m+3/2)}{k!\,\Gamma(m+k+3/2)}.
+\]
+For $k\ge1$, use the beta integral for the ratio and sum the geometric
+series over $m$. For large $|w|$ this gives
+\begin{equation}\label{eq:quadratic-beta}
+ \CC(w,t)=\frac1{w-A}
+ +\int_0^1\frac{u^{1/2}}{w-Au}
+       \sum_{k\ge1}\frac{(c/(4w))^k(1-u)^{k-1}}{k!(k-1)!}\dd u.
+\end{equation}
+All exchanges converge normally there. At the endpoint $u=1$, the
+logarithmic coefficient is minus $1/A$ times the analytic numerator
+evaluated at $u=w/A$. Reindexing $k=j+1$ yields
+\begin{equation}\label{eq:quadratic-B}
+ \mathscr B(w,t,\rho)
+ =-\frac{c\rho}{4A^2}
+   \sum_{j\ge0}\frac{[c(\rho^2-1)/(4A)]^j}{j!(j+1)!},
+ \qquad \rho^2=A/w.
+\end{equation}
+This is an all-orders convergent identity. In particular,
+$\mathscr B(A,t,1)=-c/(4A^2)$, agreeing with
+\eqref{eq:global-B}.
+
+The right side of \eqref{eq:quadratic-B} is odd in $\rho$. A fixed-$t$
+loop around zero changes the sign of the continued distinguished
+coefficient. When the loop returns to a neighborhood of the diagonal,
+the canonical coefficient of the complete kernel is unchanged because
+the singular root-filter summand has been reselected. This distinguishes
+the two objects in Remark~\ref{rem:B-sheets} concretely.
+
+\subsection{A moving endpoint with a changed lower root}
+Let
+\[
+ P=(L(t)r+c)^D,\qquad L(t)=at+b,\qquad ac\ne0,\quad D\ge2.
+\]
+This is the radial polynomial of $[ax+b(x+y)+c]^D$.
+Fix a lower endpoint $p$ with $L(p)\ne0$, and write
+$s=L(t_i(w))$, so $s^D=w$. On the lifted integration path,
+\[
+ \Phi=r+c/L,\qquad \chi=Y-c/L,\qquad
+ F=e^{c/L}(1-c/(LY)),\qquad \rho=L/s.
+\]
+Formula~\eqref{eq:global-B} now reads
+\[
+ \mathscr B\dd t=-\frac{\dd_t(e^{c/L(t)})}{Da\,s^{D-1}}.
+\]
+Since $A'(t_i)=Da\,s^{D-1}$, the full corrected expression is
+\begin{equation}\label{eq:power-history}
+ E(t_i(w))t_i'(w)+\int_p^{t_i(w)}\mathscr B\dd t
+       =\frac{e^{c/L(p)}}{Da\,s^{D-1}}.
+\end{equation}
+For a positive loop around zero, $s$ changes to $\omega s$, where
+$\omega=e^{2\pi i/D}$. The lower root parameter changes to
+$\omega^{-1}\rho$, and \eqref{eq:power-history} changes by the factor
+$\omega$. Resetting the lower root, or deleting the integral, would
+both give the wrong continuation. The general transport proof retains
+exactly these data.
+
+\section{Finite certificates for branch densities}\label{app:certificates}
+This appendix concerns auxiliary differential systems, not a bound for
+the first nonzero factorial moment. The multiplicity estimate is due
+to Moura~\cite{Moura,MouraHyper}; the \texttt{openai/math} release gives
+a formal power-series proof and a Lean statement
+\cite{OAIMultiplicity}. We record the ordinary-point form and its
+application to the weighted inverse derivatives. The proof below is
+included to specify the exact hypotheses and certificate.
+
+\subsection{The classical multiplicity estimate}
+\begin{theorem}[Moura's estimate in a polynomial presentation]
+\label{thm:multiplicity}
+Let $F$ have characteristic zero, $m,n\ge1$, $q\in F[z]$ with
+$q(0)\ne0$ and $\deg q\le n$, and $P\in M_m(F[z])$ with
+$\deg P_{ij}\le n-1$. Suppose
+\[
+ G\in\GL_m(F[[z]]),\qquad qG'=PG.
+\]
+For a constant row $u$ and constant column $v$, a nonzero series
+$y=uGv$ satisfies
+\begin{equation}\label{eq:moura-bound}
+ \ord_0 y\le(n-1)\binom m2+m-1.
+\end{equation}
+\end{theorem}
+\begin{proof}
+Put $h=uG$, and let $V$ be the $F$-span of its component series.
+Its dimension $k$ is between $1$ and $m$. Gaussian elimination on
+successive coefficients gives a basis $b_1,\ldots,b_k$ of $V$ with
+strictly increasing orders $a_1<\cdots<a_k$. The filtration by order
+is eventually zero: in a finite-dimensional space any stabilizing
