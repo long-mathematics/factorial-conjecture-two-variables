@@ -88,5 +88,13 @@
         "role": "Research provenance only"
       }
     ]
+  },
+  "van_den_essen_integral": {
+    "author": "Arno van den Essen",
+    "title": "The Amazing Image Conjecture",
+    "year": 2010,
+    "arxiv": "1006.5801v1",
+    "role": "Historical source for the Integral Conjecture and Mathieu-subspace formulation used in the FC(2) corollary",
+    "verification_scope": "Statement checked against the arXiv abstract/source summary; the FC-to-Mathieu implication in this manuscript is proved directly"
   }
 }
