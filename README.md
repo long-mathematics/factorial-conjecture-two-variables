@@ -20,6 +20,22 @@ $$
 
 The remaining flat case has $f_D=c(x+y)^D$. After normalization and algebraic specialization, its proof reduces to the nonvanishing of $\int_0^1\exp(A_1(t)/D)\,dt$. When $\deg A_1\le1$, including total degree $D\le2$, this last step is elementary apart from Hermite–Lindemann and does not require EIT I.
 
+As a formal consequence, the manuscript also settles the two-dimensional product-exponential case of van den Essen's Integral Conjecture. For
+
+$$
+M=\left\{h\in\mathbb C[x,y]:
+\int_0^\infty\!\int_0^\infty h(x,y)e^{-x-y}\,dx\,dy=0\right\}
+=\ker\mathcal L,
+$$
+
+the paper proves that $M$ is a Mathieu–Zhao subspace; more strongly,
+
+$$
+\left\{f:\mathcal L(f^m)=0\text{ for all sufficiently large }m\right\}=\{0\}.
+$$
+
+The FC–Mathieu connection itself is not claimed as new: the [Integral Conjecture](https://arxiv.org/abs/1006.5801v1) and the [Factorial Conjecture](https://arxiv.org/abs/1008.3962v2) arise from the same Image-Conjecture program. The new input to this consequence is the full inhomogeneous FC(2) result proved here.
+
 ## Status and dependencies
 
 The manuscript is **unpublished and unrefereed**. Its nonflat argument uses published Lindemann–Weierstrass and Pakovich–Muzychuk results; its general flat conclusion additionally uses a separate research theorem from EIT I. Matching the cited EIT statement is not an independent verification of its proof.
