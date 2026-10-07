@@ -50,7 +50,12 @@ composition block. Conjugate pairing excludes all nonzero critical
 values, and endpoint leaf germs dispose of the remaining pure powers.
 Combining the nonflat theorem with the explicitly stated
 single-integral nonvanishing theorem of EIT~I gives the two-variable
-Factorial Conjecture. The nonflat argument is independent of EIT~I.
+Factorial Conjecture. As a formal consequence, the zero-integral
+polynomials for the product-exponential measure
+$e^{-x-y}\dd x\dd y$ form a Mathieu--Zhao subspace; more strongly,
+a polynomial whose factorial moments vanish for all sufficiently large
+powers is zero. Thus the two-dimensional product-exponential case of
+van den Essen's Integral Conjecture follows. The nonflat argument is independent of EIT~I.
 \end{abstract}
 
 \section{The statement and the inputs}\label{sec:introduction}
@@ -100,6 +105,57 @@ For every $f\in\C[x,y]$,
 \]
 Equivalently, every nonzero $f$ has infinitely many nonzero factorial moments.
 \end{corollary}
+
+The following consequence belongs to the original Image/Mathieu framework
+in which the Factorial Conjecture was introduced. Recall that a linear
+subspace $M$ of a commutative algebra $R$ is a Mathieu subspace (now
+often called a Mathieu--Zhao subspace) if,
+whenever $f^m\in M$ for every $m\ge1$, one has $gf^m\in M$ for all
+sufficiently large $m$ for every $g\in R$. Van den Essen's Integral
+Conjecture predicts this property for the kernel of integration against a
+positive measure with finite polynomial moments~\cite{AmazingImage}.
+Thus the implication below is formal rather than a new connection; the
+substantive new input is Corollary~\ref{cor:fc2}.
+
+\begin{corollary}[Two-dimensional product-exponential Integral Conjecture]
+\label{cor:integral-mathieu}
+Let
+\[
+ B=(0,\infty)^2,\qquad
+ \dd\sigma=e^{-x-y}\dd x\dd y,
+\]
+and let
+\[
+ M=\left\{h\in\C[x,y]:
+       \int_B h\,\dd\sigma=0\right\}.
+\]
+Then $M=\ker\Lfac$ is a Mathieu--Zhao subspace of $\C[x,y]$. In fact,
+\[
+ \left\{f\in\C[x,y]:
+   \Lfac(f^m)=0\text{ for all sufficiently large }m\right\}=\{0\}.
+\]
+Consequently, the Integral Conjecture holds for the product-exponential
+measure $e^{-x-y}\dd x\dd y$ in dimension two.
+\end{corollary}
+
+\begin{proof}
+For monomials,
+\[
+ \int_B x^a y^b e^{-x-y}\dd x\dd y=a!b!,
+\]
+so $M=\ker\Lfac$. Suppose first that
+$\Lfac(f^m)=0$ for all $m\ge N$. Then for every $k\ge1$,
+\[
+ \Lfac\bigl((f^N)^k\bigr)=\Lfac(f^{Nk})=0.
+\]
+Corollary~\ref{cor:fc2} applied to $f^N$ gives $f^N=0$, hence $f=0$.
+This proves the displayed eventual-power assertion. In particular, if
+$f^m\in M$ for every $m\ge1$, then $f=0$, and therefore
+$gf^m=0\in M$ for every $g\in\C[x,y]$ and every $m\ge1$.
+Thus $M$ is a Mathieu--Zhao subspace. Since $B$ is open, $\sigma$ is
+positive, and all of its polynomial moments are finite, this is precisely
+the stated instance of the Integral Conjecture.
+\end{proof}
 
 \paragraph{Direct dependencies and scope.}
 The nonflat proof uses Lindemann--Weierstrass and the top-component
@@ -1336,6 +1392,11 @@ and branch-change examples. These finite checks are separate from the
 analytic and representation-theoretic proofs.
 \small
 \begin{thebibliography}{99}
+\bibitem{AmazingImage}
+A.~van~den~Essen, \emph{The Amazing Image Conjecture},
+arXiv:1006.5801v1 (2010).
+\href{https://arxiv.org/abs/1006.5801v1}{arXiv:1006.5801v1}.
+
 \bibitem{Baker}
 A.~Baker, \emph{Transcendental Number Theory}, Cambridge Mathematical
 Library, Cambridge University Press, 1990, Chapter~1.
