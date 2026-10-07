@@ -11,6 +11,9 @@
 
 # Generated output
 output/
+verification/degree6.json
+verification/identities.json
+verification/supplementary.json
 
 # Python
 __pycache__/

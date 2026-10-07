@@ -4,19 +4,35 @@
     "title": "Solution of the polynomial moment problem",
     "arxiv": "0710.4085v2",
     "doi": "10.1112/plms/pdp010",
-    "pinpoints": [
-      "Sections 2.1-2.2",
-      "Theorem 3.1",
-      "Proposition 4.1"
-    ]
+    "role": "Published main-proof representation input; primary source for path geometry",
+    "numbering": "All section/proposition/theorem numbers refer to arXiv v2, not independently checked journal typesetting",
+    "pinpoints": {
+      "Section 2.1": "star and inverse tree",
+      "Section 2.2": "signed path subspace",
+      "Proposition 2.4": "endpoint averaging",
+      "Proposition 2.6": "planar separation",
+      "Theorem 3.1": "rational irreducible components",
+      "Section 4.1": "top component as all-proper intersection",
+      "Proposition 4.1": "top-component containment in the path module"
+    }
+  },
+  "lindemann_weierstrass": {
+    "reference": "A. Baker, Transcendental Number Theory, Cambridge Mathematical Library, 1990, Chapter 1",
+    "role": "Published main-proof transcendence input"
+  },
+  "liu_sun": {
+    "title": "The factorial conjecture and images of locally nilpotent derivations",
+    "doi": "10.1017/S0004972719000546",
+    "role": "Prior art: homogeneous two-variable Factorial Conjecture"
   },
   "eit_i": {
     "repository": "long-mathematics/exponential-integral-theorem",
     "commit": "22d98c4f27e606b5b25fa673c33f9c56c53cc86b",
     "path": "papers/01-exponential-integral-theorem/exponential-integral-theorem.tex",
     "git_blob_sha": "24383f1086d1d110b651ef2dfa047cd2d021c88d",
-    "pinpoint": "cor:single",
-    "role": "External nonvanishing input only for flat case"
+    "pinpoint": "Corollary 1.4, source label cor:single",
+    "role": "Separate research nonvanishing theorem used only for the general flat case",
+    "verification_scope": "Quoted statement and source metadata checked; proof dependency chain not re-audited in this revision"
   },
   "moura_original": {
     "author": "Claire Moura",
@@ -24,7 +40,26 @@
     "year": 2003,
     "doi": "10.1023/A:1022155217548",
     "consulted_statement": "arXiv:math/0312323, Section 2, Theorem 1",
-    "role": "Classical estimate used and proved in Appendix B"
+    "role": "Classical auxiliary multiplicity estimate; formal polynomial-presentation version proved in Appendix B",
+    "formulation_note": "Analytic statement uses total pole order; appendix explicitly converts degree upper bounds and supplies an arbitrary-characteristic-zero formal proof"
+  },
+  "bostan_dumas": {
+    "authors": [
+      "Alin Bostan",
+      "Philippe Dumas"
+    ],
+    "title": "Wronskians and linear independence",
+    "journal": "American Mathematical Monthly",
+    "volume": 117,
+    "number": 8,
+    "year": 2010,
+    "pages": "722-727",
+    "arxiv": "1301.6598",
+    "pinpoints": [
+      "Theorem 2",
+      "Lemmas 1-3"
+    ],
+    "role": "Primary auxiliary reference for the formal-power-series Wronskian argument in Appendix B"
   },
   "openai_math": {
     "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
@@ -34,12 +69,13 @@
         "path": "lean/OAI/Algebra/FormulaHitting/Multiplicity.lean",
         "git_blob_sha": "ec10a8cacf5d7b6b5ee9f6dad74fa274e160580a",
         "declaration": "OAI.NCHitting.system_multiplicity",
-        "role": "Formal implementation of the classical estimate"
+        "role": "Auxiliary formal implementation of the classical estimate; not a formalization of this manuscript"
       },
       {
         "path": "preprints/One-Rational-Matrix-Hitting-Point-for-Noncommutative-Formulas-September-24-2026/build/multiplicity.tex",
         "git_blob_sha": "a2dc878a572f326a042a326c2d6385cbe7fb3f5b",
-        "role": "Formal power-series proof, expressly attributed to Moura"
+        "role": "Auxiliary formal-power-series proof, attributed to Moura and citing Bostan-Dumas",
+        "formulation_note": "Prose assumes deg q = n; pinned Lean declaration uses natDegree q <= n"
       },
       {
         "path": "lean/OAI/AlgebraicGeometry/Seshadri/Jets/EtaleAnalytic.lean",

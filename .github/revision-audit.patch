@@ -1,0 +1,469 @@
+diff --git a/paper/factorial_conjecture_two_variables.tex b/paper/factorial_conjecture_two_variables.tex
+index fd38176..b0efee0 100644
+--- a/paper/factorial_conjecture_two_variables.tex
++++ b/paper/factorial_conjecture_two_variables.tex
+@@ -38,16 +38,16 @@ Exact Leaf Transport and Trace Orthogonality}
+-Let $\Lfac(x^ay^b)=a!b!$. We give a proof of the two-variable Factorial
+-Conjecture using the explicitly stated single-integral nonvanishing theorem
+-of EIT~I for the constant projective leading case. For a nonconstant
+-projective leading polynomial, an exact radial Mittag--Leffler transform
+-produces vanishing leaf germs containing both a pole density and a
+-Volterra correction. The corrections admit continuation with the complete
+-integration histories retained; at a nonzero terminal critical value they
+-have no negative Puiseux coefficients. Polynomial path-module theory
+-therefore forces the weighted leading coefficient to annihilate the top
+-rational monodromy component. The unweighted inverse-derivative vector
+-belongs to that component, by a zero-trace identity on every proper
+-composition block. Conjugate pairing and Lindemann--Weierstrass exclude
+-all nonzero critical values. Endpoint logarithms dispose of the remaining
+-pure powers. All factorial-specific constructions are proved here. Appendices give exact continuation
+-examples and effective differential-system certificates not used in the
+-main proof.
++Let $\Lfac(x^ay^b)=a!b!$. We prove factorial-moment nonvanishing for
++nonzero polynomials in two variables whose highest homogeneous part is
++not a scalar multiple of $(x+y)^D$. The proof uses an exact radial
++Mittag--Leffler transform, polynomial monodromy, and
++Lindemann--Weierstrass. The transform produces vanishing leaf germs
++containing a pole density and a Volterra correction. The corrections
++continue with their full integration histories retained and have no
++negative Puiseux coefficients at a nonzero terminal critical value.
++The resulting weighted coefficient annihilates the top rational
++monodromy component, while the unweighted inverse-derivative vector
++belongs to that component by a zero-trace identity on every proper
++composition block. Conjugate pairing excludes all nonzero critical
++values, and endpoint leaf germs dispose of the remaining pure powers.
++Combining the nonflat theorem with the explicitly stated
++single-integral nonvanishing theorem of EIT~I gives the two-variable
++Factorial Conjecture. The nonflat argument is independent of EIT~I.
+@@ -67,0 +68,2 @@ For $0\ne f\in\C[x,y]$ of total degree $D\ge1$, write
++Restriction of degree-$D$ homogeneous forms to $x+y=1$ is injective:
++off $x+y=0$, homogeneity recovers the form from this restriction.
+@@ -69,0 +72,5 @@ We call the cases $d>0$ and $d=0$ \emph{nonflat} and \emph{flat}, respectively.
++In particular,
++\[
++ A\text{ is constant}\quad\Longleftrightarrow\quad
++ f_D(x,y)=c(x+y)^D\quad\text{for some }c\ne0.
++\]
+@@ -84 +91,2 @@ This is the nonvanishing part of the single-integral corollary of
+-EIT~I~\cite[Corollary \texttt{cor:single}]{EIT}; that result also asserts
++EIT~I~\cite[Corollary~1.4, source label \texttt{cor:single}]{EIT};
++that result also asserts
+@@ -99 +107,2 @@ irreducibility theorem for rational permutation modules of groups
+-containing a full cycle~\cite[Theorem~3.1]{PM}. We state precisely the part
++containing a full cycle~\cite[Theorem~3.1 and Section~4.1]{PM}.
++These are published inputs. We state precisely the part
+@@ -103,6 +112,8 @@ our notation. We do not reprove the underlying Schur-ring classification.
+-The flat step uses only Theorem~\ref{thm:eit}. Its source is a separate
+-research manuscript whose proof uses $E$-function lifting and
+-Fourier--Laplace theory; those are transitive, not additional direct,
+-inputs here. Apart from standard complex analysis, algebraic inverse
+-branches, and the Nullstellensatz and L\"uroth theorems, all remaining
+-arguments are included.
++For the unrestricted flat conclusion, the additional external input is
++Theorem~\ref{thm:eit}. Its source is a separate research manuscript;
++its proof is not reproduced here. The $E$-function lifting and
++Fourier--Laplace theory used there are transitive dependencies of that
++input. Apart from standard complex analysis, algebraic inverse branches,
++and the Nullstellensatz and L\"uroth theorems, the remaining main-text
++arguments are included. None of the appendices is a logical input to
++either main conclusion.
+@@ -127,6 +138,9 @@ scaling the proposed counterexample by its nonzero constant leading value.
+-The assumed complex point makes this ideal proper. Noetherianity and the
+-Nullstellensatz over $\Qb$ give an algebraic point satisfying every
+-moment equation. The inverse variable preserves $d$ and $D$: restriction
+-of a homogeneous form to $x+y=1$ is injective. Neither the monodromy group
+-nor the decomposition lattice has to survive specialization, since the
+-contradiction is uniform in both.
++Evaluation at the assumed complex point shows that the ideal over
++$\Qb$ is proper. Noetherianity and the Nullstellensatz give an algebraic
++point annihilating it. Every moment polynomial belongs to the ideal, so
++this point satisfies the entire family of moment equations. The inverse
++equation ensures that the degree-$d$ coefficient of $A$ is nonzero;
++hence $\deg A=d$ and $f_D\ne0$, preserving total degree $D$.
++In the flat case $A=1$ likewise ensures $f_D\ne0$.
++Neither the monodromy group nor the decomposition lattice has to survive
++specialization, since the contradiction is uniform in both.
+@@ -154,3 +168,7 @@ convergent, and
+-Indeed, the root filter below bounds $E_{D,2}(z)$ by a polynomial factor
+-times $e^{|z|^{1/D}}$, and $|P(t,r)|^{1/D}\le C(1+r)$ on a compact
+-$t$-set. The same estimate justifies summation under the integral.
++Indeed, for $x=|z|^{1/D}$ the defining series gives the global bound
++\begin{equation}\label{eq:ML-growth}
++ |E_{D,2}(z)|\le\sum_{n\ge0}\frac{x^{Dn}}{(Dn+1)!}
++ \le\sum_{m\ge0}\frac{x^m}{m!}=e^x.
++\end{equation}
++Since $|P(t,r)|^{1/D}\le C(1+r)$ on a compact $t$-set, this estimate
++also justifies summation under the integral for sufficiently large $|w|$.
+@@ -194,2 +212,6 @@ root filter
+-Apply it only after splitting the radial integral at a sufficiently large
+-$R$. Leave the compact radial part in its entire Mittag--Leffler form.
++Fix a compact set $K\subset V$. Split the radial integral at a
++sufficiently large $R$, chosen uniformly for $t\in K$, and apply the
++filter only to the exterior part. Leave the compact part in its entire
++Mittag--Leffler form. Initially impose $|w|>|A(t)|$, so
++$|\rho|=|A(t)/w|^{1/D}<1$ and all $D$ exponential summands converge.
++Each summand is then continued separately from this common domain.
+@@ -202,4 +224,5 @@ On $V$, the exterior root with leading term $r$ and its inverse are
+-The analytic inverse theorem at infinity gives convergent Laurent series,
+-uniform on exterior disks for compact subsets of $V$. The chosen leading
+-terms specify them uniquely; their coefficients are single-valued and
+-holomorphic on $V$. Define
++The analytic inverse theorem at infinity gives convergent Laurent
++series on common exterior disks for $t\in K$; one first works on a
++neighborhood of $K$ and then uses compactness. The chosen leading terms
++specify the roots and inverses uniquely, so their coefficients are
++single-valued and holomorphic on $V$. Define
+@@ -210 +233,4 @@ holomorphic on $V$. Define
+-Here $F_0=E$ and locally $|F_m(t)|\le CR_0^m$ for fixed $C,R_0$.
++Here $F_0=E$. By a uniform Cauchy estimate at infinity, there are
++$C_K,R_0>0$ such that $|F_m(t)|\le C_KR_0^m$ for every $t\in K$ and
++$m\ge0$. Enlarge $R$ so that the image paths lie in this common
++exterior domain.
+@@ -232,4 +258,17 @@ The logarithmic coefficient of $J_m$ is
+-$(-1)^m\eta^{m-1}/(m-1)!$. For $m\ge1$ its remaining part is entire;
+-on compact $\eta$-sets the recurrence bounds it by a fixed constant times
+-$R_1^{1-m}+L^{m-1}/(m-1)!$. Combining this with the geometric bound on
+-$F_m$ proves normal convergence of both continued series. Thus the tail is
++$(-1)^m\eta^{m-1}/(m-1)!$. For $m\ge1$ put
++\[
++ H_m(\eta)=J_m(\eta)
++ -\frac{(-1)^m\eta^{m-1}}{(m-1)!}\log\eta.
++\]
++The displayed formulas show that $H_m$ is entire and obeys the same
++recurrence as $J_m$. On $|\eta|\le L$, set
++$B_m=R_1^{m-1}\sup|H_m|$. Then
++\[
++ B_{m+1}\le\frac{e^{LR_1}}m+\frac{LR_1}m B_m.
++\]
++For $m\ge2LR_1$ the last coefficient is at most $1/2$; enlarging a
++constant to cover the finitely many earlier terms proves
++$\sup_{|\eta|\le L}|H_m|\le C_{L,R_1}R_1^{1-m}$.
++Together with $R_1>R_0$ and the bound on $F_m$, this proves normal
++convergence of the entire remainders. The logarithmic coefficients
++converge normally by their factorial denominators. Thus the tail is
+@@ -249,0 +289,11 @@ only a holomorphic remainder.
++The entireness used below also has a contour formulation. For any
++$R_2>R_0$, orient $|Y|=R_2$ counterclockwise. Termwise integration gives
++\[
++ \Lambda(t,\eta):=\sum_{m\ge1}\frac{(-1)^mF_m(t)}{(m-1)!}\eta^{m-1}
++ =-\frac1{2\pi i}\int_{|Y|=R_2}e^{-\eta Y}F(t,Y)\dd Y.
++\]
++Thus $|\Lambda(t,\eta)|\le C_{K,R_2}e^{R_2|\eta|}$, uniformly on $K$,
++and $\mathscr B=\rho^{D-1}\Lambda(t,1-\rho)/(DA(t))$ is holomorphic
++on the stated cover. This contour formula is for $\Lambda$; the
++prefactor must be retained when recovering $\mathscr B$.
++
+@@ -281,6 +331,14 @@ sufficiently large on a bounded $t$-disk, make the first coefficient
+-less than $1/2$. The growth estimate from \eqref{eq:filter} is then
+-integrably dominated by $e^{-r}$ times the displayed sublinear exponential
+-and a polynomial. To compare with a continued germ, first fix the entire
+-finite continuation path in $w$ away from zero, and shrink the
+-$t$-neighborhood so this bound holds along that whole path. Uniqueness of
+-continuation identifies that germ with the normally convergent integral.
++less than $1/2$. By \eqref{eq:ML-growth}, on compact $w$-sets away
++from zero the kernel integrand is bounded by
++\[
++ C_1r\exp\bigl(-r/2+C_2(1+r)^{1-1/D}\bigr),
++\]
++with the last contribution bounded when $D=1$. This is integrable and
++gives joint holomorphy locally in $(w,t)$, including at zeros of $A$.
++To compare with a continued germ, first fix the entire finite
++continuation path in $w$ away from zero. Its modulus has a positive
++minimum, so near a zero of $A$ one can shrink the $t$-neighborhood until
++$|A(t)/w|^{1/D}<1/2$ along the whole path. The single-valued integral
++agrees with the germ near infinity, hence with its continuation along
++this path by uniqueness. No uniform claim over an unbounded $t$-set is
++needed.
+@@ -310,2 +368,8 @@ therefore permits replacing the interval by $\mu$ in
+-Orient each target arm from its leaf $v$ toward $b$, and label the inverse
+-branches over $b$ by $1,\ldots,d$. The path gives a vector
++Append a simple arc from $b$ to infinity, disjoint from $T$ except at
++$b$ and straight sufficiently near infinity. Label the inverse branches
++over $b$ so that the geometric monodromy obtained by following this arc,
++making one counterclockwise turn on a large circle, and returning is
++$g_\infty=(1\ 2\ \cdots\ d)$. We retain this geometric labeling throughout;
++an arbitrary generator of the same cyclic subgroup need not preserve
++the circular order used below. Orient each target arm from its leaf
++$v$ toward $b$. The path gives a vector
+@@ -318,2 +382,7 @@ With these orientations,
+-This equality holds at infinity and on the chosen continuation off $T$.
+-It retains every lift over each leaf.
++The complement $\widehat{\C}\setminus T$ in the Riemann sphere is
++simply connected. For $t\in\mu$, the possible kernel singularities
++$0,A(t)$ lie in $T$, and the kernel is holomorphic at infinity.
++Lemmas~\ref{lem:kernel} and~\ref{lem:normality} therefore determine its
++single-valued continuation off $T$, locally uniformly along the compact
++path $\mu$. Consequently \eqref{eq:tree} holds there by continuation from
++infinity. It retains every lift over each leaf.
+@@ -336 +405,5 @@ If $\HH$ is rational, then $\mathscr L_v\equiv0$ for every nonzero leaf $v$.
+-Put $z=w-v$ and $x=u-v$. Near the leaf, set
++Only meromorphy of the chosen continued germ of $\HH$ at $v$ is
++used in this local argument. Put $z=w-v$ and $x=u-v$. The germ arriving
++from the complement of $T$ uses the diagonal root $\rho\to1$; its local
++logarithm may differ from another choice only by a holomorphic term.
++Near the leaf, set
+@@ -358,2 +431,5 @@ A common nonzero linear rescaling of $x,z$ does not affect the following
+-vanishing argument. Put
+-$q(z,x)=\int_0^x b_0(z,s)\dd s$. This tends to zero at the lower endpoint.
++vanishing argument. Take $z$ in a disk of radius less than $\epsilon$,
++slit along its positive radius. Then $z-x\ne0$ for $0\le x\le\epsilon$,
++and $\log(z-x)$ has a continuous choice on this product, holomorphic
++in $z$; at $x=\epsilon$ it is holomorphic on the full smaller disk.
++Put $q(z,x)=\int_0^x b_0(z,s)\dd s$. This tends to zero at the lower endpoint.
+@@ -384,3 +460,9 @@ proportional to $\pi/\sin(\pi\delta)$. For $\delta=0$ it is $\log z$,
+-up to a holomorphic function. Distinct fractional classes cannot cancel,
+-and none is a meromorphic germ. If \eqref{eq:corrected-cauchy}, plus
+-holomorphic terms, is rational, every $h_\delta(z,z)$ is zero. Hence
++up to a holomorphic function. Let $T_0$ denote continuation once around
++$z=0$, and choose $N$ divisible by all Puiseux denominators. Applying
++$T_0^N-1$ to a meromorphic germ kills the fractional terms and isolates
++$2\pi iN h_0(z,z)$, so $h_0(z,z)=0$. The remaining terms
++$z^\delta h_\delta(z,z)$ have distinct monodromy eigenvalues
++$e^{2\pi i\delta}\ne1$. The corresponding polynomial projectors in
++$T_0$ isolate each term from the others and from the meromorphic part.
++Since the constants multiplying $z^\delta$ are nonzero, every
++$h_\delta(z,z)$ vanishes. Hence
+@@ -426,2 +508,4 @@ $\mathscr L_v$ along its arm to $b$, and then along any path in $U$.
+-Inverse branches continue and stay in $V$. For an individual integral
+-in \eqref{eq:leaf-germ}, retain its path from the fixed $c_i$ and append
++The initial local integration paths lie in $V$, and every moving
++inverse branch stays there because $A(t_i(w))=w\ne0$.
++For an individual integral in \eqref{eq:leaf-germ}, retain its path
++from the fixed $c_i$ and append
+@@ -452 +536,3 @@ holomorphic on a disk about $\lambda$ by the product description. A
+-point with $A(t)=w$ on that history causes no pole in $\mathscr B$.
++point with $A(t)=w$ on that history causes no singularity of
++$\mathscr B$, because its coefficient series is entire in $1-\rho$.
++No extension across $A(t)=0$ is asserted or used.
+@@ -468,6 +554,7 @@ its negative coefficient is $\Phi_{\lambda,\alpha}(g n_v)=0$.
+-The complete histories can depend on more than the permutation $g$;
+-no action of $G_A$ on those histories is asserted or needed.
+-Their negative coefficients vanish, while the pole contribution depends
+-only on $g$. Linear extension proves the theorem. Removing the extra
+-regular point zero from the base, when zero is not critical, does not
+-remove any permutation from its monodromy image.
++Linear extension proves the theorem. Removing the extra regular point
++zero from the base, when zero is not critical, does not remove any
++permutation from its monodromy image. The complete histories can depend
++on more than $g$; no action of $G_A$ on those histories is asserted.
++Only the negative Puiseux coefficients factor through the permutation
++action: the history terms contribute none, while the pole contribution
++depends only on $g$.
+@@ -493,2 +580,3 @@ elements. This makes no analytic assertion at $w=0$.
+-Label sheets so a full infinity cycle is $(1\ 2\ \cdots\ d)$.
+-For $k\mid d$, let $V_k\subset\Q^d$ consist of $k$-periodic vectors, and set
++Use the geometric labeling of Section~\ref{sec:transport}, with
++$g_\infty=(1\ 2\ \cdots\ d)$, and identify sheet $i$ with $i-1$ in
++$\mathbb Z/d\mathbb Z$. For $k\mid d$, let $V_k\subset\Q^d$ consist of $k$-periodic vectors, and set
+@@ -517,2 +605,8 @@ rational $G$-module.
+-This is the top-component case of~\cite[Theorem~3.1]{PM}. Its proof uses
+-the classification of rational Schur rings over a cyclic group. That
++This is the top-component case of~\cite[Theorem~3.1 and Section~4.1]{PM}.
++All numbering in references to~\cite{PM} refers to arXiv:0710.4085v2.
++Theorem~3.1 there uses the maximal proper elements below $d$ in $D(G)$.
++Intersecting over these or over all proper elements gives the same
++space: every proper $k$ divides some maximal proper $f$, and
++$V_k\subseteq V_f$. Section~4.1 explicitly identifies the latter
++intersection with the irreducible top rational component.
++Its proof uses rational Schur rings over a cyclic group. That
+@@ -520,3 +614,3 @@ representation-theoretic theorem, not the whole polynomial moment problem,
+-is retained as an external input. The next lemmas prove its application
+-to the actual path, following the geometry of~\cite[Section~2.2 and
+-Proposition~4.1]{PM}.
++is retained as an external input. The next lemmas establish its application
++to the actual path, following~\cite[Section~2.2, Propositions~2.4, 2.6
++and~4.1]{PM}.
+@@ -551,2 +645,5 @@ $v$, the averaging replaces every coordinate by the mean over that
+-local cycle. At an interior visit of $\mu$, one edge enters and another
+-leaves the point; their sum on that cycle is zero. At an actual endpoint
++local cycle. Equivalently, the average of each basis vector is the
++uniform vector on its local-monodromy orbit, even when the monodromy
++has several cycles of different lengths. At an interior visit of $\mu$,
++one edge enters and another leaves the point; their opposite signs
++therefore cancel after averaging. At an actual endpoint
+@@ -569 +666 @@ single circle point in the second.
+-Append to $T$ a simple arc from $b$ to infinity, meeting $T$ only at $b$.
++Use the appended arc already chosen in Section~\ref{sec:transport}.
+@@ -571,3 +668,5 @@ Its lifts are disjoint rays from the $d$ center vertices to infinity.
+-Cut them off on a sufficiently large circle. Their cyclic order is that
+-of the full infinity cycle, up to reversing it, which does not affect the
+-assertion.
++Because the arc is straight near infinity, its lifted ends have
++asymptotic directions in the geometric cyclic order and each crosses
++a sufficiently large circle just once. Truncate there. The resulting
++boundary order is the order of $g_\infty$, up to reversal, which does
++not affect separation.
+@@ -583,3 +682,5 @@ labels consequently occur in one gap between consecutive labels of
+-$I_0$. A chord with endpoints in the adjacent gaps strictly separates
+-the two finite label sets. The singleton case is immediate by taking a
+-small arc about that single label.
++$I_0$. Choose one chord endpoint between the first label of $I_1$ in
++this gap and its preceding $I_0$ label, and the other between the last
++$I_1$ label and its following $I_0$ label. This chord strictly separates
++the two finite sets. If one set is a singleton, a sufficiently small
++arc about that label gives the same conclusion.
+@@ -592,6 +693,11 @@ argument applies. Otherwise $K_0\cap K_1$ is the one common ray from that
+-center to the boundary. The same Jordan separation, now cutting along
+-the common ray, puts all other labels of $K_1$ in a single sector of
+-$K_0$ adjacent to that ray. The two sets are separated by a chord
+-through their common boundary label and a point in the opposite gap.
+-The two convex hulls can meet only at the common label. This also covers
+-the case when one star has only the common ray.
++center to the boundary. After this common ray, including its center,
++is removed, the rest of $K_1$ is connected, disjoint from $K_0$, and
++has that center in its closure. It lies in one sector of $K_0$
++adjacent to the common ray. If both label sets have other labels,
++traverse this sector from the common label through the labels of $I_1$.
++Join the common label to a point in the gap between the last such
++$I_1$ label and the next $I_0$ label. The remaining labels are strictly
++on opposite sides of this chord; each convex hull touches it only at
++the common label. If either set has no other labels, its hull is that
++single point and the separation assertion is immediate. Thus the two
++hulls meet at most at the common label in all cases.
+@@ -614,0 +721,2 @@ vectors in Lemma~\ref{lem:averaging} again pairs nontrivially with $z$.
++Orthogonality of the rational spaces would imply orthogonality of
++their complexifications, so the complex witness $z$ suffices.
+@@ -656,0 +765,2 @@ hold coefficientwise in every continued Puiseux expansion.
++This uses the rational block-indicator equations, not any reality
++assumption on the coefficients of $A$.
+@@ -706,2 +816,3 @@ By hypothesis $\phi$ is bilinearly orthogonal to $\UC$. Since $U_d$
+-is defined over $\Q$, its complexification is preserved by conjugation.
+-Consequently $\overline\beta\in\UC$, and
++is defined by rational linear equations, its complexification is
++preserved by coordinatewise conjugation; $A$ itself need not have
++real coefficients. Consequently $\overline\beta\in\UC$, and
+@@ -742 +853,2 @@ exactly $m_j-1$. They therefore account for $d-q$ roots of $A'$.
+-By hypothesis they account for all $d-1$, so $q=1$.
++By hypothesis $A'$ has no zeros outside the zero set of $A$, so these
++account for all $d-1$ zeros counted with multiplicity. Hence $q=1$.
+@@ -751,7 +863,8 @@ Every nonzero value of $A$ is regular. At an actual endpoint $p$
+-with $A(p)=v\ne0$, the constant logarithmic coefficient of the leaf
+-integral is, with its orientation, $E(p)/A'(p)$. This follows either
+-from Lemma~\ref{lem:local-extraction} or directly from
+-\eqref{eq:local-kernel}: the pole density has that constant term,
+-while the Volterra correction starts at order $w-v$.
+-Unramified preimages of a leaf have graph degree one, so only the
+-actual endpoints can be active above this regular value.
++with $A(p)=v\ne0$, the corresponding summand of the corrected leaf
++germ extends holomorphically to $w=v$. Its Volterra integral vanishes
++there, because the integrand is holomorphic and the integration path
++shrinks to $p$. Its value is therefore, with the path orientation,
++$E(p)/A'(p)$. Unramified preimages of a leaf have graph degree one,
++so only actual endpoints can be active above this regular value.
++By Lemma~\ref{lem:local-extraction}, rationality would force the sum
++of these signed endpoint values to be zero.
+@@ -760 +873 @@ If $A(0)\ne A(1)$, one endpoint has a nonzero value different from the
+-other endpoint value. Its nonzero logarithmic coefficient cannot cancel.
++other endpoint value. Its nonzero leaf-germ value cannot cancel.
+@@ -832,2 +945,2 @@ On the compact set, all absolute terms are bounded by
+- \prod_{j=1}^D\frac{(M_j/a_*)^{k_j}}{k_j!},
+- \qquad M_j=\max|A_j|,\quad a_* =\min|A|>0.
++ \prod_{j=1}^D\frac{(b_j/a_*)^{k_j}}{k_j!},
++ \qquad b_j=\max|A_j|,\quad a_* =\min|A|>0.
+@@ -856,0 +970,18 @@ if a tail of its factorial moments were zero.
++\paragraph{An elementary flat subcase.}
++The EIT input is unnecessary when $A$ is constant and $\deg A_1\le1$.
++After normalizing $A=1$, retain the condition $\deg A_1\le1$ as rational
++linear equations in the specialization argument. Write
++$A_1(t)/D=\alpha t+\beta$ over $\Qb$. Then
++\[
++ \int_0^1e^{\alpha t+\beta}\dd t
++ =\begin{cases}
++ e^\beta,&\alpha=0,\\[2pt]
++ e^\beta(e^\alpha-1)/\alpha,&\alpha\ne0.
++ \end{cases}
++\]
++This is nonzero by Hermite--Lindemann~\cite{Baker}. Thus the same radial
++limit proves nonvanishing in this subcase using published inputs only;
++in particular it handles the flat case in total degree $D\le2$.
++No rate of convergence beyond the uniform $o(1)$ in
++Lemma~\ref{lem:radial-limit} is needed.
++
+@@ -875,2 +1006,3 @@ mathematical claims and their attribution.
+-The examples in this appendix are independent checks of the continuation
+-conventions. None is an input to Sections~\ref{sec:arithmetic}--\ref{sec:flat}.
++The examples in this appendix illustrate the continuation conventions.
++None is a logical input to the main proof in
++Sections~\ref{sec:kernel}--\ref{sec:flat}.
+@@ -970,7 +1102,9 @@ exactly these data.
+-This appendix concerns auxiliary differential systems, not a bound for
+-the first nonzero factorial moment. The multiplicity estimate is due
+-to Moura~\cite{Moura,MouraHyper}; the \texttt{openai/math} release gives
+-a formal power-series proof and a Lean statement
+-\cite{OAIMultiplicity}. We record the ordinary-point form and its
+-application to the weighted inverse derivatives. The proof below is
+-included to specify the exact hypotheses and certificate.
++This appendix concerns auxiliary differential systems and is not an
++input to the main proof. In particular, its branch-density tests do not
++bound the first nonzero factorial moment. The analytic multiplicity
++estimate is due to Moura~\cite{Moura,MouraHyper}. We prove the precise
++polynomial-presentation, formal-power-series version below; the proof
++is adapted from the version in~\cite{OAIMultiplicity}, which also gives
++a Lean statement. The formal Wronskian step is explained in
++Bostan--Dumas~\cite{BostanDumas}. These attributions concern the auxiliary
++estimate, not a formal verification of FC(2).
+@@ -998 +1132,2 @@ strictly increasing orders $a_1<\cdots<a_k$. The filtration by order
+-is eventually zero: in a finite-dimensional space any stabilizingnonzero tail would lie in every power of $z$, which is impossible.
++is eventually zero: in a finite-dimensional space any stabilizing
++nonzero tail would lie in every power of $z$, which is impossible.
+@@ -1038,5 +1173,18 @@ proves \eqref{eq:moura-bound}.
+-The argument is the derivative-row and Wronskian method appearing in
+-Moura's work and in the release's formal proof. The corresponding Lean
+-declaration is \texttt{OAI.NCHitting.}\allowbreak\texttt{system\_multiplicity}. Reading that
+-declaration is not a claim that the present FC(2) paper, or this
+-application, has been formally verified.
++\paragraph{Comparison with the analytic statement.}
++Over $\C$, Moura's formulation~\cite[Section~2, Theorem~1]{MouraHyper}
++uses the total pole order $\sigma$ of the matrix differential form
++$\Omega=(P/q)\dd z$ on the projective line. If $P\ne0$, put
++$s=\deg q$ and $p=\max_{P_{ij}\ne0}\deg P_{ij}$. Finite poles contribute
++at most $s$, and the pole order at infinity is at most
++$\max(0,p-s+2)$. Therefore
++\[
++ \sigma\le s+\max(0,p-s+2)=\max(s,p+2)\le n+1.
++\]
++Moura's expression $m-1+(\sigma-2)\binom m2$ gives
++\eqref{eq:moura-bound}. If $P=0$, the solution matrix is constant and
++the bound is immediate. This comparison does not assume $\deg q=n$;
++the direct proof above applies over every characteristic-zero field.
++The corresponding pinned Lean declaration is
++\texttt{OAI.NCHitting.}\allowbreak\texttt{system\_multiplicity}.
++Citing or reading that declaration does not claim that the present
++FC(2) paper, or the density application below, has been formally verified.
+@@ -1078,2 +1226,4 @@ omitting the last entry of the maximum when $P=0$.
+-For a constant coefficient vector $c$, an ordinary point $w_0\ne0$,
+-and $h(w)=\sum_i c_i h_i(w)$ on its disk, one has
++For a constant coefficient vector $c$, a point $w_0$ with $q(w_0)\ne0$
++(equivalently $w_0\notin\{0\}\cup\Crit(A)$ for the displayed $q$),
++and $h(w)=\sum_i c_i h_i(w)$ on a sufficiently small disk about $w_0$,
++one has
+@@ -1192,0 +1343,5 @@ Library, Cambridge University Press, 1990, Chapter~1.
++\bibitem{BostanDumas}
++A.~Bostan and P.~Dumas, \emph{Wronskians and linear independence},
++Amer. Math. Monthly \textbf{117} (2010), no.~8, 722--727.
++\href{https://arxiv.org/abs/1301.6598}{arXiv:1301.6598}.
++
+@@ -1211,2 +1366,2 @@ problem}, Proc. Lond. Math. Soc. (3) \textbf{99} (2009), 633--657.
+-Theorem~3.1 is the rational representation input; the path arguments
+-are in Sections~2.1--2.2 and Proposition~4.1.
++Numbering refers to arXiv~v2: Sections~2.1--2.2 and~4.1,
++Theorem~3.1, and Propositions~2.4, 2.6 and~4.1.
+@@ -1217 +1372 @@ Transcendence and Linear Relations}, EIT~I, research manuscript, 2026,
+-Corollary \texttt{cor:single}.
++Corollary~1.4 (source label \texttt{cor:single}).
+@@ -1220,2 +1375 @@ commit \texttt{22d98c4f27e606b5b25fa673c33f9c56c53cc86b},
+-consulted 7 October 2026. This is the external input to
+-Theorem~\ref{thm:eit}; its proof is not reproduced here.
++consulted 7 October 2026; the separate input to Theorem~\ref{thm:eit}.
+@@ -1233 +1387 @@ preprint, 2003, Section~2, Theorem~1.
+-Used for the stated ordinary-point multiplicity estimate.
++Analytic total-pole-order formulation; see Appendix~\ref{app:certificates}.
+@@ -1242 +1396,3 @@ Formulas}, manuscript dated 24 September 2026, section
+-The manuscript attributes the estimate to Moura. Sources pinned to
++The manuscript attributes the estimate to Moura and its formal
++Wronskian ingredient to Bostan--Dumas. Its prose uses $\deg q=n$;
++the cited Lean statement allows $\deg q\le n$. Sources pinned to
+@@ -1264 +1420 @@ billiard hypotheses are not asserted for the present integrals.
+-\end{document}
+\ No newline at end of file
++\end{document}

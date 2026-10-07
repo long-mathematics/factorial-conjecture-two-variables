@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -19,14 +22,22 @@ jobs:
       - name: Install Python dependencies
         run: python3 -m pip install --break-system-packages -r requirements.txt
 
-      - name: Run exact checks
-        run: make test
-
-      - name: Build manuscript
-        run: make
+      - name: Test, build, and validate the tracked snapshot
+        run: make check
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
           name: factorial-conjecture-two-variables-pdf
           path: output/pdf/factorial_conjecture_two_variables.pdf
+          if-no-files-found: error
+
+      - name: Upload check records and final compiler log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: factorial-conjecture-two-variables-checks
+          path: |
+            verification/*.json
+            output/pdf/factorial_conjecture_two_variables.log
+          if-no-files-found: warn
