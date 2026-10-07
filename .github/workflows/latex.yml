@@ -11,22 +11,27 @@ permissions:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
       - name: Install system dependencies
+        timeout-minutes: 8
         run: |
-          sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended lmodern python3-pip
+          sudo timeout 120s apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 update
+          sudo env DEBIAN_FRONTEND=noninteractive timeout 360s apt-get install -y --no-install-recommends latexmk texlive-latex-extra texlive-fonts-recommended lmodern python3-pip
 
       - name: Install Python dependencies
-        run: python3 -m pip install --break-system-packages -r requirements.txt
+        timeout-minutes: 2
+        run: python3 -m pip install --timeout 30 --retries 2 --break-system-packages -r requirements.txt
 
       - name: Test, build, and validate the tracked snapshot
         run: make check
 
       - name: Upload PDF
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: factorial-conjecture-two-variables-pdf
           path: output/pdf/factorial_conjecture_two_variables.pdf
@@ -34,7 +39,7 @@ jobs:
 
       - name: Upload check records and final compiler log
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: factorial-conjecture-two-variables-checks
           path: |
