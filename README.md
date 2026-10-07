@@ -2,10 +2,10 @@
 
 This repository contains an unpublished research manuscript proving the two-variable Factorial Conjecture
 
-$
+$$
 \mathcal{L}(x^a y^b)=a!b!,\qquad
 \left(\mathcal{L}(f^n)=0\text{ for all }n\ge 1\right)\Longrightarrow f=0.
-$
+$$
 
 The nonflat case is proved using an exact radial Mittag--Leffler transform, full leaf transport with retained continuation histories, polynomial monodromy/path modules, trace orthogonality, and Lindemann--Weierstrass. The constant projective-leading case uses the explicitly stated single-integral nonvanishing theorem from EIT I.
 
