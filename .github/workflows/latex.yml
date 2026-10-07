@@ -6,15 +6,21 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install TeX
+      - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended lmodern
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended lmodern python3-pip
+
+      - name: Install Python dependencies
+        run: python3 -m pip install --break-system-packages -r requirements.txt
+
+      - name: Run exact checks
+        run: make test
 
       - name: Build manuscript
         run: make
