@@ -32,3 +32,22 @@ The unspecified complex-cubic numerical experiment reported in the conversation 
 ## Release workflow
 
 The root PDF and fingerprint manifest are refreshed together. CI validates their consistency and retains exact-check reports and the final log. Routine CI remains read-only; refreshing a snapshot is an explicit release operation. Local builds can differ in PDF metadata from CI builds, so validation compares the committed PDF with its own recorded fingerprint rather than with a new build's bytes.
+
+
+## Follow-up: product-exponential Integral/Mathieu consequence
+
+A short corollary was added after FC(2). For the product-exponential measure
+$e^{-x-y}\,dx\,dy$ on $(0,\infty)^2$, its zero-integral polynomial space is
+exactly $\ker\mathcal L$. The proof records the stronger tail statement:
+if $\mathcal L(f^m)=0$ for every sufficiently large $m$, then applying FC(2)
+to $f^N$ for a suitable $N$ gives $f=0$. The Mathieu--Zhao conclusion is then
+immediate.
+
+The historical framing was checked against Arno van den Essen,
+*The Amazing Image Conjecture*, arXiv:1006.5801v1, which states the Integral
+Conjecture, and against van den Essen--Wright--Zhao, *On the Image
+Conjecture*, which introduced the Factorial Conjecture in the same program.
+Accordingly, the manuscript does not claim that the FC--Mathieu connection
+is new; it claims only the consequence of the present FC(2) theorem for this
+specific two-dimensional measure. No claim of an exhaustive literature
+search for independent proofs is made here.
