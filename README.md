@@ -23,15 +23,15 @@ The remaining flat case has $f_D=c(x+y)^D$. After normalization and algebraic sp
 As a formal consequence, the manuscript also settles the two-dimensional product-exponential case of van den Essen's Integral Conjecture. For
 
 $$
-M=\left\{h\in\mathbb C[x,y]:
-\int_0^\infty\!\int_0^\infty h(x,y)e^{-x-y}\,dx\,dy=0\right\}
-=\ker\mathcal L,
+M=\lbrace h\in\mathbb{C}[x,y]:
+\int_0^\infty\!\int_0^\infty h(x,y)e^{-x-y}\,dx\,dy=0\rbrace
+=\ker\mathcal{L},
 $$
 
 the paper proves that $M$ is a Mathieu–Zhao subspace; more strongly,
 
 $$
-\left\{f:\mathcal L(f^m)=0\text{ for all sufficiently large }m\right\}=\{0\}.
+\lbrace f\in\mathbb{C}[x,y]:\mathcal{L}(f^m)=0\text{ for all sufficiently large }m\rbrace=\lbrace0\rbrace.
 $$
 
 The FC–Mathieu connection itself is not claimed as new: the [Integral Conjecture](https://arxiv.org/abs/1006.5801v1) and the [Factorial Conjecture](https://arxiv.org/abs/1008.3962v2) arise from the same Image-Conjecture program. The new input to this consequence is the full inhomogeneous FC(2) result proved here.
