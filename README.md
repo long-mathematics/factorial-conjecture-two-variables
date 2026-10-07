@@ -16,7 +16,10 @@ The manuscript is **unpublished and unrefereed**. Supporting symbolic checks ver
 ## Repository layout
 
 - `paper/factorial_conjecture_two_variables.tex` — standalone LaTeX manuscript.
-- `.github/workflows/latex.yml` — CI manuscript build.
+- `scripts/verify_degree6.py` — exact rational-arithmetic checks for the degree-six collision example.
+- `scripts/verify_identities.py` — symbolic checks for kernel and auxiliary identities.
+- `verification/` — generated exact-check records.
+- `.github/workflows/latex.yml` — CI build and verification workflow.
 - `CITATION.cff` — citation metadata.
 - `LICENSE.md` — dual-license notice.
 
@@ -33,6 +36,14 @@ This builds:
 ```text
 output/pdf/factorial_conjecture_two_variables.pdf
 ```
+
+Run the exact checks with:
+
+```sh
+make test
+```
+
+The current suite contains 17 degree-six checks and 405 symbolic checks.
 
 ## Mathematical dependencies
 
