@@ -11,17 +11,17 @@ permissions:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
 
       - name: Install system dependencies
-        timeout-minutes: 8
+        timeout-minutes: 12
         run: |
           sudo timeout 120s apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 update
-          sudo env DEBIAN_FRONTEND=noninteractive timeout 360s apt-get install -y --no-install-recommends latexmk texlive-latex-extra texlive-fonts-recommended lmodern python3-pip
+          sudo env DEBIAN_FRONTEND=noninteractive timeout 600s apt-get install -y --no-install-recommends latexmk texlive-latex-extra texlive-fonts-recommended lmodern python3-pip
 
       - name: Install Python dependencies
         timeout-minutes: 2
