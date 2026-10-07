@@ -2,64 +2,63 @@
 
 Christopher D. Long
 
-[Paper PDF](factorial_conjecture_two_variables.pdf) · [LaTeX source](paper/factorial_conjecture_two_variables.tex) · [Verification scripts](scripts/)
+[Paper PDF](factorial_conjecture_two_variables.pdf) · [LaTeX source](paper/factorial_conjecture_two_variables.tex) · [Verification scripts](scripts/) · [Revision record](audits/2026-10-07-exposition.md)
 
-This repository contains an unpublished research manuscript proving the two-variable Factorial Conjecture
+This repository contains an unpublished research manuscript on the factorial functional
 
 $$
-\mathcal{L}(x^a y^b)=a!b!,\qquad
-\left(\mathcal{L}(f^n)=0\text{ for all }n\ge 1\right)\Longrightarrow f=0.
+\mathcal{L}(x^a y^b)=a!b!.
 $$
 
-The nonflat case is proved using an exact radial Mittag--Leffler transform, full leaf transport with retained continuation histories, polynomial monodromy/path modules, trace orthogonality, and Lindemann--Weierstrass. The constant projective-leading case uses the explicitly stated single-integral nonvanishing theorem from EIT I.
+The **nonflat theorem** proves that a nonzero polynomial $f$ of total degree $D$ has infinitely many nonzero factorial moments whenever its highest homogeneous part $f_D$ is not a scalar multiple of $(x+y)^D$. Equivalently, $A(t)=f_D(t,1-t)$ is nonconstant. This argument uses an exact radial Mittag–Leffler transform, corrected leaf identities with retained continuation histories, polynomial monodromy, simultaneous block traces, and Lindemann–Weierstrass. It is independent of EIT I.
 
-## Status
+Combining the nonflat theorem with the explicitly stated single-integral nonvanishing theorem of [EIT I, Corollary 1.4 (`cor:single`), at the pinned commit](https://github.com/long-mathematics/exponential-integral-theorem/blob/22d98c4f27e606b5b25fa673c33f9c56c53cc86b/papers/01-exponential-integral-theorem/exponential-integral-theorem.tex) gives the **full two-variable Factorial Conjecture**:
 
-The manuscript is **unpublished and unrefereed**. Supporting symbolic checks verify finite identities used in examples and auxiliary calculations; they are not a formal verification of FC(2), analytic continuation, polynomial monodromy, or the EIT I input.
+$$
+\left(\mathcal{L}(f^n)=0\text{ for every }n\ge1\right)\Longrightarrow f=0.
+$$
 
-## Repository layout
+The remaining flat case has $f_D=c(x+y)^D$. After normalization and algebraic specialization, its proof reduces to the nonvanishing of $\int_0^1\exp(A_1(t)/D)\,dt$. When $\deg A_1\le1$, including total degree $D\le2$, this last step is elementary apart from Hermite–Lindemann and does not require EIT I.
 
-- `factorial_conjecture_two_variables.pdf` — tracked PDF snapshot of the manuscript.
-- `paper/factorial_conjecture_two_variables.tex` — canonical LaTeX manuscript source.
-- `scripts/verify_degree6.py` — exact rational-arithmetic checks for the degree-six collision example.
-- `scripts/verify_identities.py` — symbolic checks for kernel and auxiliary identities.
-- `verification/` — generated exact-check records.
-- `.github/workflows/latex.yml` — CI build and verification workflow.
-- `CITATION.cff` — citation metadata.
-- `LICENSE.md` — dual-license notice.
+## Status and dependencies
 
-## Build
+The manuscript is **unpublished and unrefereed**. Its nonflat argument uses published Lindemann–Weierstrass and Pakovich–Muzychuk results; its general flat conclusion additionally uses a separate research theorem from EIT I. Matching the cited EIT statement is not an independent verification of its proof.
 
-With TeX Live and `latexmk`:
+The manuscript proves the endpoint averaging, planar separation, path-module containment, analytic leaf transport, block traces, and arithmetic pairing needed in its own notation. All Pakovich–Muzychuk numbering refers to arXiv:0710.4085v2. Exact source versions, pinpoints, and roles are recorded in [the reference ledger](references/source_references.json).
+
+Supporting computations check finite identities, not FC(2), analytic continuation, polynomial monodromy, or EIT I as universal theorems. Model-assisted audit records are not external refereeing or Lean formalization.
+
+Appendices A and C illustrate continuation conventions and a collision of critical points with incomparable decompositions. Appendix B is retained as an **auxiliary density-certificate appendix**, not a bound for the first nonzero factorial moment. It records Moura's estimate, a formal-power-series proof, and the Bostan–Dumas Wronskian argument. The October 2026 `openai/math` release influenced exploration and supplies an auxiliary proof/formalization reference; none of its results is an input to the main FC(2) proof.
+
+## Build, checks, and PDF snapshot
+
+Install TeX Live with `latexmk` and the standard LaTeX/font packages used by the manuscript, and install the pinned Python dependency:
 
 ```sh
+python3 -m pip install -r requirements.txt
 make
-```
-
-This builds:
-
-```text
-output/pdf/factorial_conjecture_two_variables.pdf
-```
-
-The root-level [`factorial_conjecture_two_variables.pdf`](factorial_conjecture_two_variables.pdf) is a committed snapshot for stable browser viewing and download.
-
-Run the exact checks with:
-
-```sh
 make test
 ```
 
-The current suite contains 17 degree-six checks and 405 symbolic checks.
+`make` builds `output/pdf/factorial_conjecture_two_variables.pdf` and checks the final LaTeX log for unresolved citations/references, duplicate labels, missing glyphs, and fatal diagnostics. The test suite includes the original 17 degree-six checks and 405 symbolic checks, eight supplementary groups (including 70,215 exact radial-coefficient tuples), and 11 release-tool regression tests. The tuple grid is a finite sanity check, not 70,215 independent mathematical proofs.
 
-## Mathematical dependencies
+After changing the manuscript or its build inputs, refresh the browser-facing PDF:
 
-The nonflat argument uses classical Lindemann--Weierstrass and the rational top-component irreducibility theorem of Pakovich--Muzychuk. The endpoint averaging, planar separation, actual path-module containment, analytic leaf transport, block traces, and arithmetic pairing used in the proof are developed in the manuscript.
+```sh
+make snapshot
+make check
+```
 
-The flat conclusion uses the single-integral nonvanishing corollary of EIT I.
+Commit `factorial_conjecture_two_variables.pdf` and `verification/pdf_snapshot.json` together with the source changes. The manifest fingerprints the source, Makefile, snapshot script, and committed PDF. `make snapshot-check` detects stale sources or a modified PDF. It deliberately does not compare a newly built PDF byte-for-byte with the committed one: compiler versions and metadata can change those bytes.
 
-The October 2026 `openai/math` release influenced proof exploration and supplied useful comparison tools, but no theorem from that release is a dependency of the main FC(2) proof. Appendix B discusses Claire Moura's multiplicity estimate and the formal treatment of that estimate in `openai/math` as a potentially useful finite-certificate tool.
+CI runs `make check` with read-only repository permissions and uploads the built PDF, final log, and generated exact-check reports. It does not automatically commit to `main`. Visual inspection remains part of a release; the automated checks do not establish that a proof is correct or a page layout is acceptable.
 
-## License
+## Repository layout
 
-The manuscript and mathematical exposition are licensed under **CC BY 4.0**. Code and build tooling are licensed under the **MIT License**. See `LICENSE.md`.
+- `paper/` and the root PDF contain the manuscript source and tracked snapshot.
+- `scripts/` contains the finite mathematical checks and build/snapshot validators.
+- `verification/` contains the tracked snapshot manifest and documentation for generated reports.
+- `references/` and `audits/` record source provenance and the scope of revision checks.
+- `.github/workflows/latex.yml`, `Makefile`, and `requirements.txt` define CI and the local build.
+
+`CITATION.cff` supplies citation metadata. The manuscript and mathematical exposition are licensed under **CC BY 4.0**; code and build tooling are under the **MIT License**. See [LICENSE.md](LICENSE.md).
