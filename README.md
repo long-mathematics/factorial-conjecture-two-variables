@@ -1,5 +1,9 @@
 # Factorial Conjecture in Two Variables
 
+Christopher D. Long
+
+[Paper PDF](factorial_conjecture_two_variables.pdf) · [LaTeX source](paper/factorial_conjecture_two_variables.tex) · [Verification scripts](scripts/)
+
 This repository contains an unpublished research manuscript proving the two-variable Factorial Conjecture
 
 $$
@@ -15,7 +19,8 @@ The manuscript is **unpublished and unrefereed**. Supporting symbolic checks ver
 
 ## Repository layout
 
-- `paper/factorial_conjecture_two_variables.tex` — standalone LaTeX manuscript.
+- `factorial_conjecture_two_variables.pdf` — tracked PDF snapshot of the manuscript.
+- `paper/factorial_conjecture_two_variables.tex` — canonical LaTeX manuscript source.
 - `scripts/verify_degree6.py` — exact rational-arithmetic checks for the degree-six collision example.
 - `scripts/verify_identities.py` — symbolic checks for kernel and auxiliary identities.
 - `verification/` — generated exact-check records.
@@ -36,6 +41,8 @@ This builds:
 ```text
 output/pdf/factorial_conjecture_two_variables.pdf
 ```
+
+The root-level [`factorial_conjecture_two_variables.pdf`](factorial_conjecture_two_variables.pdf) is a committed snapshot for stable browser viewing and download.
 
 Run the exact checks with:
 
