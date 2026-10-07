@@ -9,21 +9,29 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: prepare-audit-revision-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 jobs:
   prepare:
     if: github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'revision/audit-exposition-2026-10-07'
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-      - name: Install build dependencies
+      - name: Install TeX noninteractively with a time limit
+        timeout-minutes: 8
         run: |
-          sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended lmodern python3-pip
-          python3 -m pip install --break-system-packages -r requirements.txt
+          sudo timeout 120s apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 update
+          sudo env DEBIAN_FRONTEND=noninteractive timeout 360s apt-get install -y --no-install-recommends latexmk texlive-latex-extra texlive-fonts-recommended lmodern python3-pip
+      - name: Install Python dependency
+        timeout-minutes: 2
+        run: python3 -m pip install --timeout 30 --retries 2 --break-system-packages -r requirements.txt
       - name: Apply the locally reviewed, fingerprinted source revision
         run: |
           test "$(git hash-object paper/factorial_conjecture_two_variables.tex)" = fd381763cb68294bca0110c7503d8dd43efdfd70
