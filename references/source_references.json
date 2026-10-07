@@ -95,6 +95,6 @@
     "year": 2010,
     "arxiv": "1006.5801v1",
     "role": "Historical source for the Integral Conjecture and Mathieu-subspace formulation used in the FC(2) corollary",
-    "verification_scope": "Statement checked against the arXiv abstract/source summary; the FC-to-Mathieu implication in this manuscript is proved directly"
+    "verification_scope": "Statement checked against arXiv:1006.5801v1, including the Mathieu-subspace definition in Section 1 and the Integral Conjecture statement in the abstract/full text"
   }
 }
