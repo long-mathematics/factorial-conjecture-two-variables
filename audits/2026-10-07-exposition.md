@@ -44,8 +44,8 @@ to $f^N$ for a suitable $N$ gives $f=0$. The Mathieu--Zhao conclusion is then
 immediate.
 
 The historical framing was checked against Arno van den Essen,
-*The Amazing Image Conjecture*, arXiv:1006.5801v1, which states the Integral
-Conjecture, and against van den Essen--Wright--Zhao, *On the Image
+*The Amazing Image Conjecture*, arXiv:1006.5801v1, including its Section 1
+Mathieu-subspace definition and its stated Integral Conjecture, and against van den Essen--Wright--Zhao, *On the Image
 Conjecture*, which introduced the Factorial Conjecture in the same program.
 Accordingly, the manuscript does not claim that the FC--Mathieu connection
 is new; it claims only the consequence of the present FC(2) theorem for this
