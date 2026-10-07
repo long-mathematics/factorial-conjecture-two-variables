@@ -1,0 +1,40 @@
+name: commit-pdf-snapshot
+
+on:
+  push:
+    branches:
+      - paper/track-pdf
+    paths:
+      - .github/workflows/commit-tracked-pdf.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Install TeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-extra texlive-fonts-recommended lmodern
+
+      - name: Build PDF
+        run: make
+
+      - name: Commit tracked PDF snapshot
+        run: |
+          cp output/pdf/factorial_conjecture_two_variables.pdf factorial_conjecture_two_variables.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add factorial_conjecture_two_variables.pdf
+          if git diff --cached --quiet; then
+            echo "Tracked PDF is already current."
+            exit 0
+          fi
+          git commit -m "Add compiled manuscript PDF"
+          git push origin "HEAD:${{ github.ref_name }}"
