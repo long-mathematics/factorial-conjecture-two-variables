@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "inputs_sha256": {
+    "paper/factorial_conjecture_two_variables.tex": "fa34365a4f872b9ccd29e67d6173ae745db2cf8a395e2257afd984912144eee1",
+    "Makefile": "7f1ea6d748ca0d9c751f8fe65d34e0cc966106b86bb9ba770e7a67f5bcece873",
+    "scripts/check_pdf_snapshot.py": "d77078358999a2dd0cce16992ebe110c8bdb4dac14808983030172f530d6bb21"
+  },
+  "pdf_path": "factorial_conjecture_two_variables.pdf",
+  "pdf_sha256": "9c4e9e9453309fe2e91cfdb56425ece214df9964ca16276f9928639599ca04eb",
+  "compiler": "pdfTeX 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian)",
+  "refresh_command": "make snapshot",
+  "scope": "Source/PDF consistency only; not mathematical verification."
+}
