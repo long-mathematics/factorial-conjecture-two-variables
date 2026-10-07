@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this manuscript or its verification materials, please cite the manuscript."
+title: "Factorial Moments in Two Variables: Exact Leaf Transport and Trace Orthogonality"
+type: software
+authors:
+  - family-names: Long
+    given-names: Christopher D.
+date-released: 2026-10-07
+url: "https://github.com/long-mathematics/factorial-conjecture-two-variables"
+repository-code: "https://github.com/long-mathematics/factorial-conjecture-two-variables"
+license: CC-BY-4.0
+preferred-citation:
+  type: article
+  title: "Factorial Moments in Two Variables: Exact Leaf Transport and Trace Orthogonality"
+  authors:
+    - family-names: Long
+      given-names: Christopher D.
+  year: 2026

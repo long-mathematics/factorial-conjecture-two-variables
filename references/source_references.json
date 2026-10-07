@@ -1,0 +1,56 @@
+{
+  "consulted": "2026-10-07",
+  "pakovich_muzychuk": {
+    "title": "Solution of the polynomial moment problem",
+    "arxiv": "0710.4085v2",
+    "doi": "10.1112/plms/pdp010",
+    "pinpoints": [
+      "Sections 2.1-2.2",
+      "Theorem 3.1",
+      "Proposition 4.1"
+    ]
+  },
+  "eit_i": {
+    "repository": "long-mathematics/exponential-integral-theorem",
+    "commit": "22d98c4f27e606b5b25fa673c33f9c56c53cc86b",
+    "path": "papers/01-exponential-integral-theorem/exponential-integral-theorem.tex",
+    "git_blob_sha": "24383f1086d1d110b651ef2dfa047cd2d021c88d",
+    "pinpoint": "cor:single",
+    "role": "External nonvanishing input only for flat case"
+  },
+  "moura_original": {
+    "author": "Claire Moura",
+    "title": "Bounds for the Vanishing Order for Solutions of a Linear Differential System",
+    "year": 2003,
+    "doi": "10.1023/A:1022155217548",
+    "consulted_statement": "arXiv:math/0312323, Section 2, Theorem 1",
+    "role": "Classical estimate used and proved in Appendix B"
+  },
+  "openai_math": {
+    "commit": "adc7f1241b42e322a6451854ab7e4b4c146bf78a",
+    "main_proof_dependency": false,
+    "sources": [
+      {
+        "path": "lean/OAI/Algebra/FormulaHitting/Multiplicity.lean",
+        "git_blob_sha": "ec10a8cacf5d7b6b5ee9f6dad74fa274e160580a",
+        "declaration": "OAI.NCHitting.system_multiplicity",
+        "role": "Formal implementation of the classical estimate"
+      },
+      {
+        "path": "preprints/One-Rational-Matrix-Hitting-Point-for-Noncommutative-Formulas-September-24-2026/build/multiplicity.tex",
+        "git_blob_sha": "a2dc878a572f326a042a326c2d6385cbe7fb3f5b",
+        "role": "Formal power-series proof, expressly attributed to Moura"
+      },
+      {
+        "path": "lean/OAI/AlgebraicGeometry/Seshadri/Jets/EtaleAnalytic.lean",
+        "git_blob_sha": "00e4946642b8f5c4fb698eb835eb1846c42e94c5",
+        "role": "Research provenance only"
+      },
+      {
+        "path": "preprints/Rigidity-of-Smooth-Billiards-with-a-Continuous-Caustic-Collar-September-24-2026/build/sections/04-continuation.tex",
+        "git_blob_sha": "9787a166cea46e53363f0e3554235176cf642c03",
+        "role": "Research provenance only"
+      }
+    ]
+  }
+}
