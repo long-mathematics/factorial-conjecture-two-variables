@@ -5,7 +5,7 @@ type: software
 authors:
   - family-names: Long
     given-names: Christopher D.
-date-released: 2026-10-07
+date-released: 2026-11-21
 url: "https://github.com/long-mathematics/factorial-conjecture-two-variables"
 repository-code: "https://github.com/long-mathematics/factorial-conjecture-two-variables"
 license: CC-BY-4.0

@@ -12,7 +12,7 @@ $$
 
 The **nonflat theorem** proves that a nonzero polynomial $f$ of total degree $D$ has infinitely many nonzero factorial moments whenever its highest homogeneous part $f_D$ is not a scalar multiple of $(x+y)^D$. Equivalently, $A(t)=f_D(t,1-t)$ is nonconstant. This argument uses an exact radial Mittag–Leffler transform, corrected leaf identities with retained continuation histories, polynomial monodromy, simultaneous block traces, and Lindemann–Weierstrass. It is independent of EIT I.
 
-Combining the nonflat theorem with the explicitly stated single-integral nonvanishing theorem of [EIT I, Corollary 1.4 (`cor:single`), at the pinned commit](https://github.com/long-mathematics/exponential-integral-theorem/blob/22d98c4f27e606b5b25fa673c33f9c56c53cc86b/papers/01-exponential-integral-theorem/exponential-integral-theorem.tex) gives the **full two-variable Factorial Conjecture**:
+Combining the nonflat theorem with the explicitly stated single-integral nonvanishing theorem of [EIT I, Corollary 1.4 (`cor:single`), published as hexagon:2611.00736v1](https://hexagonmath.org/2611.00736v1) gives the **full two-variable Factorial Conjecture**:
 
 $$
 \left(\mathcal{L}(f^n)=0\text{ for every }n\ge1\right)\Longrightarrow f=0.
@@ -38,7 +38,7 @@ The FC–Mathieu connection itself is not claimed as new: the [Integral Conjectu
 
 ## Status and dependencies
 
-The manuscript is **unpublished and unrefereed**. Its nonflat argument uses published Lindemann–Weierstrass and Pakovich–Muzychuk results; its general flat conclusion additionally uses a separate research theorem from EIT I. Matching the cited EIT statement is not an independent verification of its proof.
+The manuscript is **unpublished and unrefereed**. Its nonflat argument uses published Lindemann–Weierstrass and Pakovich–Muzychuk results; its general flat conclusion additionally uses a separate research theorem from EIT I, now published on Hexagon. EIT II and III are also published as [hexagon:2611.00737v1](https://hexagonmath.org/2611.00737v1) and [hexagon:2611.00738v1](https://hexagonmath.org/2611.00738v1); neither is a direct dependency of this manuscript. Matching the cited EIT statement is not an independent verification of its proof, and publication on Hexagon is not represented here as external peer review.
 
 The manuscript proves the endpoint averaging, planar separation, path-module containment, analytic leaf transport, block traces, and arithmetic pairing needed in its own notation. All Pakovich–Muzychuk numbering refers to arXiv:0710.4085v2. Exact source versions, pinpoints, and roles are recorded in [the reference ledger](references/source_references.json).
 
