@@ -27,12 +27,22 @@
   },
   "eit_i": {
     "repository": "long-mathematics/exponential-integral-theorem",
-    "commit": "22d98c4f27e606b5b25fa673c33f9c56c53cc86b",
+    "commit": "92db79eedeb064694ff20e9201d73fc2bc0857f4",
     "path": "papers/01-exponential-integral-theorem/exponential-integral-theorem.tex",
     "git_blob_sha": "24383f1086d1d110b651ef2dfa047cd2d021c88d",
     "pinpoint": "Corollary 1.4, source label cor:single",
-    "role": "Separate research nonvanishing theorem used only for the general flat case",
-    "verification_scope": "Quoted statement and source metadata checked; proof dependency chain not re-audited in this revision"
+    "role": "Separate theorem published on Hexagon, used only for the general flat case",
+    "verification_scope": "Published source SHA-256 matches the reviewed source at the pinned repository commit; quoted statement and Corollary 1.4 checked. Publication is not treated as independent peer review; the EIT proof was not re-audited in this update.",
+    "previous_source_pin": {
+      "commit": "22d98c4f27e606b5b25fa673c33f9c56c53cc86b",
+      "git_blob_sha": "24383f1086d1d110b651ef2dfa047cd2d021c88d",
+      "consulted": "2026-10-07"
+    },
+    "hexagon_identifier": "2611.00736v1",
+    "published_url": "https://hexagonmath.org/2611.00736v1",
+    "published_source_url": "https://hexagonmath.org/src/2611.00736v1",
+    "source_sha256": "65567be47d72340210a99932fbcd989fd5e690ffa081b668d0a09c0dde3a902d",
+    "consulted": "2026-11-21"
   },
   "moura_original": {
     "author": "Claire Moura",
@@ -96,5 +106,6 @@
     "arxiv": "1006.5801v1",
     "role": "Historical source for the Integral Conjecture and Mathieu-subspace formulation used in the FC(2) corollary",
     "verification_scope": "Statement checked against arXiv:1006.5801v1, including the Mathieu-subspace definition in Section 1 and the Integral Conjecture statement in the abstract/full text"
-  }
+  },
+  "last_publication_update": "2026-11-21"
 }
